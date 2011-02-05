@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Networks>
+  <Network name="test1">
+    <Proxy type="PacFile" url="http://proxy.local.lan/proxy.pac" />
+    <Rules>
+      <Subnet ip="10.0.0.0/8" />
+      <DNS ip="10.0.0.1"/>
+    </Rules>
+  </Network>
+  <Network name="test2">
+    <Proxy type="Standard" url="http://proxy.local.lan:3128" />
+    <Rules>
+      <DNS ip="10.0.0.1" />
+      <DNS ip="10.0.0.2" />
+    </Rules>
+  </Network>
+  <Network name="default">
+    <Proxy type="None" />
+  </Network>
+</Networks>
