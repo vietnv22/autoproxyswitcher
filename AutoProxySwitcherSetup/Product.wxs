@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define projectName= "AutoProxySwitcher"?>
 <?define author= "Christophe LEITIENNE"?>
-<?define version= "1.0.8.0"?>
-<?define productCode= "{72E99F02-22BC-4e28-BC23-4ECBE3632F33}"?> <!-- changes with each version -->
+<?define version= "1.0.10.0"?>
+<?define productCode= "*"?> <!-- changes with each version -->
 <?define upgradeCode= "{728F0A1C-9210-4661-99CD-F5644F01ABBB}"?> <!-- doesn't change -->
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-	<Product Id="$(var.productCode)" Name="$(var.projectName)" Language="1033" Version="$(var.version)" Manufacturer="$(var.author)" UpgradeCode="$(var.upgradeCode)">
+	<Product Id="$(var.productCode)" Name="$(var.projectName) $(var.version)" Language="1033" Version="$(var.version)" Manufacturer="$(var.author)" UpgradeCode="$(var.upgradeCode)">
 		<Package InstallerVersion="300" Compressed="yes" />
 
     <!-- Force close previous version -->
@@ -44,6 +44,8 @@
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ApplicationProgramsFolder" Name="$(var.projectName)"/>
       </Directory>
+      <Directory Id="StartupFolder">
+      </Directory>
     </Directory>
 
     <DirectoryRef Id="INSTALLLOCATION">
@@ -52,16 +54,6 @@
         <File Id="AutoProxySwitcher.exe.config" Source="$(var.AutoProxySwitcher.TargetDir)AutoProxySwitcher.exe.config"/>
         <File Id="AutoProxySwitcherLib.dll" Source="$(var.AutoProxySwitcher.TargetDir)AutoProxySwitcherLib.dll"/>
         <File Id="SystemProxy.dll" Source="$(var.AutoProxySwitcher.TargetDir)SystemProxy.dll"/>
-      </Component>
-
-      <!-- Auto-start via Registry -->
-      <Component Id="ApplicationAutostart" Guid="{2C167F3F-3988-44DB-9897-23DEDF3B068C}">
-        <Registry Id="MerAs.rst" Root="HKMU" Action="write"
-                      Key="Software\Microsoft\Windows\CurrentVersion\Run"
-                      Name="$(var.projectName)"
-                      Value="[INSTALLLOCATION]AutoProxySwitcher.exe"
-                      Type="string" />
-        <Condition>AUTOSTART_VIA_REGISTRY</Condition>
       </Component>
     </DirectoryRef>
 
@@ -88,6 +80,19 @@
       </Component>
     </DirectoryRef>
 
+    <!-- Auto-start -->
+    <DirectoryRef Id="StartupFolder">
+      <Component Id="ApplicationAutostart" Guid="{2E8C6CC7-6679-4639-BDAF-8107623F446C}">
+        <Shortcut Id="ApplicationStartupShortcut"
+                  Name="$(var.projectName)"
+                  Description="$(var.projectName)"
+                  Target="[INSTALLLOCATION]AutoProxySwitcher.exe"
+                  WorkingDirectory="INSTALLLOCATION" />
+        <Condition>AUTOSTART</Condition>
+        <RegistryValue Root="HKCU" Key="Software\$(var.author)\$(var.projectName)" Name="autostartinstalled" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+    
     <!-- Features -->
     <Feature Id="ProductFeature" Title="$(var.projectName)" Level="1">
       <ComponentRef Id="ProductComponent" />
@@ -128,7 +133,7 @@
         Impersonate="yes" />
 
     <!-- Property containing autostart flag -->
-    <Property Id="AUTOSTART_VIA_REGISTRY">1</Property>
+    <Property Id="AUTOSTART">1</Property>
 
   </Product>
 </Wix>

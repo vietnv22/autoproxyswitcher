@@ -73,7 +73,6 @@ namespace AutoProxySwitcher
             {
                 NetworkRulesSet networkRulesSet = new NetworkRulesSet();
                 ProxySettings proxySettings = null;
-                NameValueCollection section;
 
                 foreach (System.Xml.XmlNode rule in network.SelectNodes("Rules/*"))
                 {
