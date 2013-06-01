@@ -1,0 +1,8 @@
+syntax: glob
+bin/*
+Debug/*
+*.user
+syntax: glob
+obj/*
+syntax: glob
+*.suo

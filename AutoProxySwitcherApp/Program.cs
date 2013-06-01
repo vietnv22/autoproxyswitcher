@@ -13,9 +13,16 @@ namespace AutoProxySwitcher
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SystrayForm());
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new SystrayForm());
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Fatal Error: " + ex);
+            }
         }
     }
 }
