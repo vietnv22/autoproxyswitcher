@@ -36,8 +36,8 @@ namespace AutoProxySwitcher
         }
 
         /// <summary>
-        /// Retourne la liste des réseau IP disponibles, au format texte: "a.b.c.d/bits"
-        /// Cette liste est obtenue à partie de la liste des IP principales de chaque interface
+        /// Gives the list of available connected networks, in text format: "a.b.c.d/bits"
+        /// This list is build from the list of main IPs of each network interface
         /// </summary>
         /// <returns></returns>
         public static Dictionary<string, NetworkInfo> ListAvailableNetworks()

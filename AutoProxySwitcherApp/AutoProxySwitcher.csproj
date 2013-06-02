@@ -136,7 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="network.ico" />
-    <Content Include="rules.xml">
+    <Content Include="Examples\rules.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
