@@ -70,8 +70,16 @@ namespace AutoProxySwitcher
 
         private void SystrayForm_Load(object sender, EventArgs e)
         {
+            string rulesFile = Environment.ExpandEnvironmentVariables(System.Configuration.ConfigurationManager.AppSettings["RulesFile"]);
+
+            // Create default rules files if it doesn't exists
+            if (!System.IO.File.Exists(rulesFile))
+            {
+                System.IO.File.Copy("Examples/rules.xml", rulesFile);
+            }
+
             // Charger les règles
-            m_networkChangeDetector.LoadRules(System.Configuration.ConfigurationSettings.AppSettings["RulesFile"]);
+            m_networkChangeDetector.LoadRules(rulesFile);
             m_networkChangeDetector.ProxyChanged += new NetworkChangeDetector.ProxyChangedEventHandler(m_networkChangeDetector_ProxyChanged);
             m_networkChangeDetector.StartMonitor();
 

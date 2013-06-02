@@ -8,14 +8,14 @@ using AutoProxySwitcher.Rules;
 namespace AutoProxySwitcher
 {
     /// <summary>
-    /// Liste de règles
+    /// Set of rules
     /// </summary>
     public class NetworkRulesSet : List<NetworkRule>
     {
     }
 
     /// <summary>
-    /// Vérificateur de règles
+    /// Rules checker. Contains a rule set which can be checks against a given network information
     /// </summary>
     public class RulesChecker
     {
@@ -69,10 +69,10 @@ namespace AutoProxySwitcher
         }
 
         /// <summary>
-        /// Détermine si les règles correspondent au réseau trouvé
+        /// Find rule matching the given network informations
         /// </summary>
-        /// <param name="net"></param>
-        /// <returns></returns>
+        /// <param name="net">Network information</param>
+        /// <returns>Result containing reason of match</returns>
         public RulesCheckerResult CheckRulesAgainstNetwork(NetworkInfo net)
         {
             // Si aucune règle, alors ça matche automatiquement

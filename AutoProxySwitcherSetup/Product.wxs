@@ -46,7 +46,16 @@
       </Directory>
       <Directory Id="StartupFolder">
       </Directory>
+      <Directory Id="CommonAppDataFolder" Name="AppDataFolder">
+        <Directory Id="MyAppFolder" Name="$(var.projectName)" />
+      </Directory>
     </Directory>
+
+    <DirectoryRef Id="MyAppFolder">
+      <Component Id="MyAppFolderId" Guid="{BB791787-4632-45C0-88C0-E3FABCC502CE}">
+        <CreateFolder />
+      </Component>
+    </DirectoryRef>
 
     <DirectoryRef Id="INSTALLLOCATION">
       <Component Id="ProductComponent" Guid="{FF34DE0B-7842-4d7b-B68A-102F294318C2}">
@@ -59,7 +68,7 @@
 
     <DirectoryRef Id="SAMPLELOCATION">
       <Component Id="SampleFiles" Guid="{49162DE1-3F5D-421D-A327-04ACD3AF1332}">
-        <File Id="rules.xml" Source="$(var.AutoProxySwitcher.TargetDir)rules.xml"/>
+        <File Id="rules.xml" Source="$(var.AutoProxySwitcher.TargetDir)Examples\rules.xml"/>
       </Component>
     </DirectoryRef>
 
@@ -99,6 +108,7 @@
       <ComponentRef Id="SampleFiles" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="ApplicationAutostart" />
+      <ComponentRef Id="MyAppFolderId" />
     </Feature>
 
     <!-- UI: let user choose install dir, let user decide if he wants to launch application at end of install -->
