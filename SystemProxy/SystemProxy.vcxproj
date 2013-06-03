@@ -13,10 +13,6 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB73EEA2-83E1-4389-AB96-E3B00686112C}</ProjectGuid>
     <RootNamespace>SystemProxy</RootNamespace>
-    <SccProjectName>Svn</SccProjectName>
-    <SccAuxPath>Svn</SccAuxPath>
-    <SccLocalPath>Svn</SccLocalPath>
-    <SccProvider>SubversionScc</SccProvider>
     <Keyword>ManagedCProj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

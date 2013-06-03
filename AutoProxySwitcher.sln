@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoProxySwitcherLib", "AutoProxySwitcherLib\AutoProxySwitcherLib.csproj", "{576CD081-DDB5-435C-9758-BF7442C9F42E}"
 EndProject
 Global
+	GlobalSection(MercurialSourceControlSolutionProperties) = preSolution
+		SolutionIsControlled = True
+		SolutionBindings = <Solution Location In Database>
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
