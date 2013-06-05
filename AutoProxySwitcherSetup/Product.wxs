@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define projectName= "AutoProxySwitcher"?>
 <?define author= "Christophe LEITIENNE"?>
-<?define version= "1.0.11.0"?>
+<?define version= "1.0.12.0"?>
 <?define productCode= "*"?> <!-- changes with each version -->
 <?define upgradeCode= "{728F0A1C-9210-4661-99CD-F5644F01ABBB}"?> <!-- doesn't change -->
 
