@@ -50,27 +50,29 @@ namespace AutoProxySwitcher
             // Afficher tooltip indiquant disponibilité
             if (networkInfo != null && proxySettings != null)
             {
-                m_notifyIcon.BalloonTipText = String.Format("Réseau \"{0}\" disponible\nInterface: {1}, adresse: {2}\nRaison : {3}", name, networkInfo.Name, networkInfo.IP, reason);
+                m_notifyIcon.BalloonTipText = String.Format("Network \"{0}\" available\nInterface: {1}, adress: {2}\nReason : {3}", name, networkInfo.Name, networkInfo.IP, reason);
                 m_notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             }
             else if (networkInfo == null)
             {
-                m_notifyIcon.BalloonTipText = String.Format("Configuration forcée du réseau \"{0}\"\nRaison : {1}", name, reason);
+                m_notifyIcon.BalloonTipText = String.Format("Configuration forced of network \"{0}\"\nReason : {1}", name, reason);
                 m_notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             }
             else
             {
-                m_notifyIcon.BalloonTipText = String.Format("Aucune règle trouvée, pas de changement");
+                m_notifyIcon.BalloonTipText = String.Format("No rule found, no change");
                 m_notifyIcon.BalloonTipIcon = ToolTipIcon.Warning;
             }
 
-            m_statusForm.Status = "Date de modification: " + System.DateTime.Now + "\n" + m_notifyIcon.BalloonTipText;
+            m_statusForm.Status = "Update date: " + System.DateTime.Now + "\n" + m_notifyIcon.BalloonTipText;
             m_notifyIcon.ShowBalloonTip(3000);
         }
 
         private void SystrayForm_Load(object sender, EventArgs e)
         {
-            string rulesFile = Environment.ExpandEnvironmentVariables(System.Configuration.ConfigurationManager.AppSettings["RulesFile"]);
+            string rulesFile = System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData)
+                + "\\AutoProxySwitcher\\"
+                + Environment.ExpandEnvironmentVariables(System.Configuration.ConfigurationManager.AppSettings["RulesFile"]);
 
             // Create default rules files if it doesn't exists
             if (!System.IO.File.Exists(rulesFile))

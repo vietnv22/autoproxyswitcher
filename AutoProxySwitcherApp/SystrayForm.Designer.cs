@@ -54,26 +54,26 @@
             this.toolStripSeparator1,
             this.m_toolStripMenuItemQuit});
             this.m_contextMenuStrip.Name = "m_contextMenuStrip";
-            this.m_contextMenuStrip.Size = new System.Drawing.Size(153, 76);
+            this.m_contextMenuStrip.Size = new System.Drawing.Size(112, 54);
             // 
             // statutToolStripMenuItem
             // 
             this.statutToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.statutToolStripMenuItem.Name = "statutToolStripMenuItem";
-            this.statutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.statutToolStripMenuItem.Text = "Statut";
+            this.statutToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.statutToolStripMenuItem.Text = "Status";
             this.statutToolStripMenuItem.Click += new System.EventHandler(this.statutToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(108, 6);
             // 
             // m_toolStripMenuItemQuit
             // 
             this.m_toolStripMenuItemQuit.Name = "m_toolStripMenuItemQuit";
-            this.m_toolStripMenuItemQuit.Size = new System.Drawing.Size(152, 22);
-            this.m_toolStripMenuItemQuit.Text = "Quitter";
+            this.m_toolStripMenuItemQuit.Size = new System.Drawing.Size(111, 22);
+            this.m_toolStripMenuItemQuit.Text = "Exit";
             this.m_toolStripMenuItemQuit.Click += new System.EventHandler(this.toolStripMenuItemQuit_Click);
             // 
             // SystrayForm
@@ -83,7 +83,7 @@
             this.ClientSize = new System.Drawing.Size(168, 148);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SystrayForm";
-            this.Opacity = 0;
+            this.Opacity = 0D;
             this.ShowInTaskbar = false;
             this.Text = "Auto Proxy Switcher";
             this.Load += new System.EventHandler(this.SystrayForm_Load);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define projectName= "AutoProxySwitcher"?>
 <?define author= "Christophe LEITIENNE"?>
-<?define version= "1.0.12.0"?>
+<!--<?define version= "1.0.13.0"?>-->
 <?define productCode= "*"?> <!-- changes with each version -->
 <?define upgradeCode= "{728F0A1C-9210-4661-99CD-F5644F01ABBB}"?> <!-- doesn't change -->
 
@@ -54,6 +54,7 @@
     <DirectoryRef Id="MyAppFolder">
       <Component Id="MyAppFolderId" Guid="{BB791787-4632-45C0-88C0-E3FABCC502CE}">
         <CreateFolder />
+        <File Id="rules.xml" Source="$(var.AutoProxySwitcher.TargetDir)Examples\rules.xml"/>
       </Component>
     </DirectoryRef>
 
@@ -63,12 +64,13 @@
         <File Id="AutoProxySwitcher.exe.config" Source="$(var.AutoProxySwitcher.TargetDir)AutoProxySwitcher.exe.config"/>
         <File Id="AutoProxySwitcherLib.dll" Source="$(var.AutoProxySwitcher.TargetDir)AutoProxySwitcherLib.dll"/>
         <File Id="SystemProxy.dll" Source="$(var.AutoProxySwitcher.TargetDir)SystemProxy.dll"/>
+        <File Id="msvcr110.dll" Source="C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\redist\x86\Microsoft.VC110.CRT\msvcr110.dll" />
       </Component>
     </DirectoryRef>
 
     <DirectoryRef Id="SAMPLELOCATION">
       <Component Id="SampleFiles" Guid="{49162DE1-3F5D-421D-A327-04ACD3AF1332}">
-        <File Id="rules.xml" Source="$(var.AutoProxySwitcher.TargetDir)Examples\rules.xml"/>
+        <File Id="sample_rules.xml" Source="$(var.AutoProxySwitcher.TargetDir)Examples\rules.xml"/>
       </Component>
     </DirectoryRef>
 

@@ -50,7 +50,7 @@
             // m_toolStripStatusLabel
             // 
             this.m_toolStripStatusLabel.Name = "m_toolStripStatusLabel";
-            this.m_toolStripStatusLabel.Size = new System.Drawing.Size(19, 17);
+            this.m_toolStripStatusLabel.Size = new System.Drawing.Size(16, 17);
             this.m_toolStripStatusLabel.Text = "...";
             // 
             // m_labelStatus
@@ -89,7 +89,7 @@
             this.Controls.Add(this.m_labelStatus);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "StatusForm";
-            this.Text = "Etat";
+            this.Text = "Status";
             this.Load += new System.EventHandler(this.StatusForm_Load);
             this.m_statusStrip.ResumeLayout(false);
             this.m_statusStrip.PerformLayout();
