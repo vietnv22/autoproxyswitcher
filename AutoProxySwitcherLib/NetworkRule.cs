@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AutoProxySwitcher.Rules
+namespace AutoProxySwitcherLib.Rules
 {
     public abstract class NetworkRule { };
 

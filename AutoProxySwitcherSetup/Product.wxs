@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define projectName= "AutoProxySwitcher"?>
 <?define author= "Christophe LEITIENNE"?>
-<!--<?define version= "1.0.13.0"?>-->
 <?define productCode= "*"?> <!-- changes with each version -->
 <?define upgradeCode= "{728F0A1C-9210-4661-99CD-F5644F01ABBB}"?> <!-- doesn't change -->
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-	<Product Id="$(var.productCode)" Name="$(var.projectName) $(var.version)" Language="1033" Version="$(var.version)" Manufacturer="$(var.author)" UpgradeCode="$(var.upgradeCode)">
-		<Package InstallerVersion="300" Compressed="yes" />
+  <Product Id="$(var.productCode)" Name="$(var.projectName) $(var.version)" Language="1033" Version="$(var.version)" Manufacturer="$(var.author)" UpgradeCode="$(var.upgradeCode)">
+    <Package InstallerVersion="300" Compressed="yes" />
 
     <!-- Force close previous version -->
     <util:CloseApplication Id="CloseApplication" 
@@ -36,11 +35,11 @@
 
     <!-- Install directory tree and shorcuts -->
     <Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
+      <Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLLOCATION" Name="$(var.projectName)">
           <Directory Id="SAMPLELOCATION" Name="Examples" />
         </Directory>
-			</Directory>
+      </Directory>
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ApplicationProgramsFolder" Name="$(var.projectName)"/>
       </Directory>
@@ -63,7 +62,9 @@
         <File Id="AutoProxySwitcher.exe" Source="$(var.AutoProxySwitcher.TargetPath)" KeyPath="yes"/>
         <File Id="AutoProxySwitcher.exe.config" Source="$(var.AutoProxySwitcher.TargetDir)AutoProxySwitcher.exe.config"/>
         <File Id="AutoProxySwitcherLib.dll" Source="$(var.AutoProxySwitcher.TargetDir)AutoProxySwitcherLib.dll"/>
+        <File Id="AutoProxySwitcher.exe.log4net" Source="$(var.AutoProxySwitcher.TargetDir)AutoProxySwitcher.exe.log4net" />
         <File Id="SystemProxy.dll" Source="$(var.AutoProxySwitcher.TargetDir)SystemProxy.dll"/>
+        <File Id="log4net.dll" Source="$(var.AutoProxySwitcher.TargetDir)log4net.dll"/>
         <File Id="msvcr110.dll" Source="C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\redist\x86\Microsoft.VC110.CRT\msvcr110.dll" />
       </Component>
     </DirectoryRef>
