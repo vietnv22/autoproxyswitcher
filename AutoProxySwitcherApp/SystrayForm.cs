@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Deployment.Application;
 using System.Collections;
 using System.Collections.Specialized;
+using AutoProxySwitcherLib;
 
 namespace AutoProxySwitcher
 {
@@ -50,17 +51,17 @@ namespace AutoProxySwitcher
             // Afficher tooltip indiquant disponibilité
             if (networkInfo != null && proxySettings != null)
             {
-                m_notifyIcon.BalloonTipText = String.Format("Network \"{0}\" available\nInterface: {1}, adress: {2}\nReason : {3}", name, networkInfo.Name, networkInfo.IP, reason);
+                m_notifyIcon.BalloonTipText = String.Format("Configuration \"{0}\" available\nInterface: {1}\naddress(es): {2}\nReason: {3}", name, networkInfo.Name, String.Join(", ", networkInfo.IP), reason);
                 m_notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             }
             else if (networkInfo == null)
             {
-                m_notifyIcon.BalloonTipText = String.Format("Configuration forced of network \"{0}\"\nReason : {1}", name, reason);
+                m_notifyIcon.BalloonTipText = String.Format("Configuration \"{0}\" available\nReason: {1}", name, reason);
                 m_notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             }
             else
             {
-                m_notifyIcon.BalloonTipText = String.Format("No rule found, no change");
+                m_notifyIcon.BalloonTipText = String.Format("No ruleNode found, no change");
                 m_notifyIcon.BalloonTipIcon = ToolTipIcon.Warning;
             }
 
@@ -81,14 +82,14 @@ namespace AutoProxySwitcher
             }
 
             // Charger les règles
-            m_networkChangeDetector.LoadRules(rulesFile);
+            m_networkChangeDetector.LoadConfigurations(rulesFile);
             m_networkChangeDetector.ProxyChanged += new NetworkChangeDetector.ProxyChangedEventHandler(m_networkChangeDetector_ProxyChanged);
             m_networkChangeDetector.StartMonitor();
 
             m_statusForm.comboProxy.Items.Add("auto");
-            foreach (KeyValuePair<string, KeyValuePair<NetworkRulesSet, ProxySettings>> proxy in m_networkChangeDetector.Proxies)
+            foreach (NetworkConfiguration configuration in m_networkChangeDetector.Configurations)
             {
-                m_statusForm.comboProxy.Items.Add(proxy.Key);
+                m_statusForm.comboProxy.Items.Add(configuration.Name);
             }
             m_statusForm.comboProxy.SelectedIndex = 0;
         }

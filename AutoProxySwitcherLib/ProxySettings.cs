@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AutoProxySwitcher
+namespace AutoProxySwitcherLib
 {
     public abstract class ProxySettings
     {

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Networks>
-  <!-- Uses given proxy PAC file when IP is "10.0.0.1" or when subnet is "10.0.0.0/8" -->
-  <Network name="test1">
+  <!-- Uses given proxy PAC file when DNS IP is "10.0.0.1" or when subnet is "10.0.0.0/8" -->
+  <Network name="Network Config 1">
     <Proxy type="PacFile" url="http://proxy.local.lan/proxy.pac" />
     <Rules>
       <Subnet ip="10.0.0.0/8" />
@@ -10,16 +10,23 @@
   </Network>
   
   <!-- Uses given proxy when computer IP is "10.0.0.1" or "10.0.0.2" -->
-  <Network name="test2">
+  <Network name="Network Config 2">
     <Proxy type="Standard" url="http://proxy.local.lan:3128" />
     <Rules>
-      <DNS ip="10.0.0.1" />
-      <DNS ip="10.0.0.2" />
+      <Subnet ip="192.168.1.0/24" />
     </Rules>
   </Network>
-  
-  <!-- By default, do not use any proxy -->
-  <Network name="default">
+
+   <!-- Uses given proxy when computer IP is "10.0.0.1" or "10.0.0.2" -->
+  <Network name="Network Config 3">
+    <Proxy type="Standard" url="http://proxy.local.lan:3128" />
+    <Rules>
+      <DNS ip="192.168.1.254" />
+    </Rules>
+  </Network>
+
+  <!-- By default (there's no rules), do not use any proxy -->
+  <Network name="Default Config">
     <Proxy type="None" />
   </Network>
 </Networks>

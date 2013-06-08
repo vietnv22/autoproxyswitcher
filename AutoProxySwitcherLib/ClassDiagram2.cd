@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AutoProxySwitcherLib.NetworkChangeDetector">
+    <Position X="10.75" Y="0.5" Width="2" />
+    <NestedTypes>
+      <Delegate Name="AutoProxySwitcherLib.NetworkChangeDetector.ProxyChangedEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>NetworkChangeDetector.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ABAAAAACAABACAAAAAAECAAAAAAAIAAAAAIAAAAAAAA=</HashCode>
+      <FileName>NetworkChangeDetector.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Configurations" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.NetworkConfiguration">
+    <Position X="8" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAACAAAAAAAAAAAQAAACEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NetworkConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ProxySettings" />
+      <Property Name="NetworkRulesSet" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.NetworkInfo" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAQAIAEAAAAAQAAAAAAACAA=</HashCode>
+      <FileName>NetworkInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.ProxySettings" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProxySettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.ProxyPACSettings" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAABAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>ProxySettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.StandardProxySettings" Collapsed="true">
+    <Position X="3" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProxySettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.NoProxySettings" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProxySettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.NetworkRulesSet">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RulesChecker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.RulesChecker">
+    <Position X="4.25" Y="4" Width="1.5" />
+    <NestedTypes>
+      <Class Name="AutoProxySwitcherLib.RulesChecker.RulesCheckerResult" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RulesChecker.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAgAAAAAQAA=</HashCode>
+      <FileName>RulesChecker.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NetworkRulesSet" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.Rules.NetworkRule" Collapsed="true">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NetworkRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.Rules.NetworkRuleDNS" Collapsed="true">
+    <Position X="8.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>NetworkRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoProxySwitcherLib.Rules.NetworkRuleSubnet" Collapsed="true">
+    <Position X="6.25" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>NetworkRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

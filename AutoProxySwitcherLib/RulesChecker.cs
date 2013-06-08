@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
-using AutoProxySwitcher.Rules;
+using AutoProxySwitcherLib.Rules;
 
-namespace AutoProxySwitcher
+namespace AutoProxySwitcherLib
 {
     /// <summary>
     /// Set of rules
@@ -15,7 +15,17 @@ namespace AutoProxySwitcher
     }
 
     /// <summary>
-    /// Rules checker. Contains a rule set which can be checks against a given network information
+    /// Matching (or not matching) reasons
+    /// </summary>
+    public enum Reasons
+    {
+        MATCH,      // A ruleNode match
+        DEFAULT,    // The default configuration match (the one with no rules)
+        NOMATCH
+    };
+
+    /// <summary>
+    /// Rules checker. Contains a ruleNode set which can be checks against a given network information
     /// </summary>
     public class RulesChecker
     {
@@ -34,42 +44,41 @@ namespace AutoProxySwitcher
 
         public class RulesCheckerResult
         {
-            private bool match;
-            private string reason;
+            private Reasons reason;
+            private string textReason;
 
             public RulesCheckerResult()
             {
-                this.match = false;
-                this.reason = null;
+                this.textReason = null;
+                this.reason = Reasons.NOMATCH;
             }
 
-            public RulesCheckerResult(bool match)
+            public RulesCheckerResult(Reasons reason, string reasonString)
             {
-                this.match = match;
-                this.reason = null;
-            }
-
-            public RulesCheckerResult(bool match, string reason)
-            {
-                this.match = match;
                 this.reason = reason;
+                this.textReason = reasonString;
             }
 
             public bool Match
             {
-                get { return match; }
-                set { match = value; }
+                get { return reason != Reasons.NOMATCH; }
             }
 
-            public string Reason
+            public Reasons Reason
             {
                 get { return reason; }
                 set { reason = value; }
             }
+
+            public string ReasonString
+            {
+                get { return textReason; }
+                set { textReason = value; }
+            }
         }
 
         /// <summary>
-        /// Find rule matching the given network informations
+        /// Find ruleNode matching the given network informations
         /// </summary>
         /// <param name="net">Network information</param>
         /// <returns>Result containing reason of match</returns>
@@ -78,7 +87,7 @@ namespace AutoProxySwitcher
             // Si aucune règle, alors ça matche automatiquement
             if (m_NetworkRulesSet.Count == 0)
             {
-                return new RulesCheckerResult(true, "default rule match");
+                return new RulesCheckerResult(Reasons.DEFAULT, "default rule match");
             }
 
             // Parcourir les règles de détection
@@ -90,20 +99,23 @@ namespace AutoProxySwitcher
                     {
                         if ((rule as NetworkRuleDNS).DNS == dns)
                         {
-                            return new RulesCheckerResult(true, "network DNS matches " + dns);
+                            return new RulesCheckerResult(Reasons.MATCH, "network DNS matches " + dns);
                         }
                     }
                 }
                 else if (rule is NetworkRuleSubnet)
                 {
-                    if ((rule as NetworkRuleSubnet).Subnet == net.IP)
+                    foreach (string ip in net.NetworkIP)
                     {
-                        return new RulesCheckerResult(true, "network subnet matches " + net.IP);
+                        if ((rule as NetworkRuleSubnet).Subnet == ip)
+                        {
+                            return new RulesCheckerResult(Reasons.MATCH, "network subnet matches " + ip);
+                        }
                     }
                 }
             }
 
-            return new RulesCheckerResult(false);
+            return new RulesCheckerResult(Reasons.NOMATCH, "");
         }
     }
 }

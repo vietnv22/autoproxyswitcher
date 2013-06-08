@@ -5,25 +5,28 @@ using System.Text;
 using System.Net.NetworkInformation;
 using System.Diagnostics;
 using System.Collections.Specialized;
-using AutoProxySwitcher.Rules;
+using AutoProxySwitcherLib.Rules;
+using log4net;
 
-namespace AutoProxySwitcher
+namespace AutoProxySwitcherLib
 {
     public class NetworkChangeDetector
     {
-        Dictionary<string, KeyValuePair<NetworkRulesSet, ProxySettings>> m_proxies;
+        private static readonly ILog log = LogManager.GetLogger(typeof(NetworkChangeDetector));
+
+        private List<NetworkConfiguration> m_configurations;
 
         public delegate void ProxyChangedEventHandler(string name, NetworkInfo networkInfo, ProxySettings proxySettings, string reason);
 
         public event ProxyChangedEventHandler ProxyChanged;
 
         /// <summary>
-        /// Assigne ou retourne les règles
+        /// Assigns or returns proxyNode/rules configurations
         /// </summary>
-        public Dictionary<string, KeyValuePair<NetworkRulesSet, ProxySettings>> Proxies
+        public List<NetworkConfiguration> Configurations
         {
-            get { return m_proxies; }
-            set { m_proxies = value; }
+            get { return m_configurations; }
+            set { m_configurations = value; }
         }
 
         /// <summary>
@@ -32,14 +35,14 @@ namespace AutoProxySwitcher
         public void StartMonitor()
         {
             NetworkChange.NetworkAddressChanged += new NetworkAddressChangedEventHandler(AddressChangedCallback);
-            Debug.WriteLine("Listening for address changes. Press any key to exit.");
+            log.Info("Listening for address changes");
             SetProxyAccordingToNetwork();
         }
 
         /// <summary>
-        /// Définir le proxy
+        /// Définir le configuration
         /// </summary>
-        /// <param name="network">Nom du réseau, mettre null pour autodétection</param>
+        /// <param name="networkNode">Nom du réseau, mettre null pour autodétection</param>
         public void SetProxy(string name)
         {
             if (name == null)
@@ -48,55 +51,58 @@ namespace AutoProxySwitcher
             }
             else
             {
-                m_proxies[name].Value.Configure();
+                NetworkConfiguration configuration = m_configurations.Find((c) => c.Name == name);
+                configuration.ProxySettings.Configure();
 
                 // Evénement
                 if (ProxyChanged != null)
                 {
-                    ProxyChanged(name, null, m_proxies[name].Value, "Setting forced");
+                    ProxyChanged(name, null, configuration.ProxySettings, "Setting forced");
                 }
             }
         }
 
         /// <summary>
-        /// Chargement des règles dans le fichier de configuration
+        /// Loads configurations from file
         /// </summary>
         /// <returns></returns>
-        public void LoadRules(string fileName)
+        public void LoadConfigurations(string fileName)
         {
             System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
             doc.Load(fileName);
-            Dictionary<string, KeyValuePair<NetworkRulesSet, ProxySettings>> proxies = new Dictionary<string, KeyValuePair<NetworkRulesSet, ProxySettings>>();
+            List<NetworkConfiguration> configurations = new List<NetworkConfiguration>();
+
+            log.Debug("Loading configurations");
 
             // Chargement des règles
-            foreach (System.Xml.XmlNode network in doc.SelectNodes("/Networks/Network"))
+            foreach (System.Xml.XmlNode networkNode in doc.SelectNodes("/Networks/Network"))
             {
                 NetworkRulesSet networkRulesSet = new NetworkRulesSet();
                 ProxySettings proxySettings = null;
 
-                foreach (System.Xml.XmlNode rule in network.SelectNodes("Rules/*"))
+                foreach (System.Xml.XmlNode ruleNode in networkNode.SelectNodes("Rules/*"))
                 {
-                    if (rule.Name == "Subnet")
+                    if (ruleNode.Name == "Subnet")
                     {
-                        networkRulesSet.Add(new NetworkRuleSubnet(rule.Attributes["ip"].Value));
+                        networkRulesSet.Add(new NetworkRuleSubnet(ruleNode.Attributes["ip"].Value));
                     }
-                    else if (rule.Name == "DNS")
+                    else if (ruleNode.Name == "DNS")
                     {
-                        networkRulesSet.Add(new NetworkRuleDNS(rule.Attributes["ip"].Value));
+                        networkRulesSet.Add(new NetworkRuleDNS(ruleNode.Attributes["ip"].Value));
                     }
                 }
 
-                // Chargement des paramètres du proxy
-                System.Xml.XmlNode proxy = network.SelectSingleNode("Proxy");
+                // Chargement des paramètres du configuration
+                System.Xml.XmlNode proxyNode = networkNode.SelectSingleNode("Proxy");
                 
-                switch (proxy.Attributes["type"].Value)
+                switch (proxyNode.Attributes["type"].Value)
                 {
                     case "PacFile":
-                        proxySettings = new ProxyPACSettings(proxy.Attributes["url"].Value);
+                        proxySettings = new ProxyPACSettings(proxyNode.Attributes["url"].Value);
                         break;
 
                     case "Standard":
-                        proxySettings = new StandardProxySettings(proxy.Attributes["url"].Value);
+                        proxySettings = new StandardProxySettings(proxyNode.Attributes["url"].Value);
                         break;
 
                     case "None":
@@ -104,69 +110,76 @@ namespace AutoProxySwitcher
                         break;
 
                     default:
-                        throw new Exception("Unknown ProxyType" + proxy.Attributes["type"].Value);
+                        throw new Exception("Unknown ProxyType" + proxyNode.Attributes["type"].Value);
                 }
 
                 // Ajouter la configuration
-                proxies.Add(network.Attributes["name"].Value, new KeyValuePair<NetworkRulesSet, ProxySettings>(networkRulesSet, proxySettings));
+                configurations.Add(new NetworkConfiguration(networkNode.Attributes["name"].Value, networkRulesSet, proxySettings));
             }
 
-            m_proxies = proxies;
+            log.DebugFormat("Configurations loaded: {0}", configurations.Count);
+
+            m_configurations = configurations;
         }
 
         /// <summary>
         /// Méthode appelée lorsque l'adresse d'une interface change
-        /// Cette méthode parcoure la liste des réseaux disponibles pour savoir s'il faut changer de proxy
+        /// Cette méthode parcoure la liste des réseaux disponibles pour savoir s'il faut changer de configuration
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void AddressChangedCallback(object sender, EventArgs e)
         {
-            Trace.TraceInformation("Changement d'adresses");
+            log.Info("Adress changed");
             SetProxyAccordingToNetwork();
         }
 
         private void SetProxyAccordingToNetwork()
         {
-            string name = "";
-            NetworkInfo availableNetwork = null;
-            NetworkRulesSet networkRulesSet = null;
-            ProxySettings proxySetting = null;
+            NetworkInfo matchingNetwork = null;
+            NetworkConfiguration matchingConfiguration = null;
             RulesChecker.RulesCheckerResult result = new RulesChecker.RulesCheckerResult();
+            int countMatches = 0;
 
-            // Checker chaque réseau par rapport à la liste des règles
-            foreach (KeyValuePair<string, NetworkInfo> net in NetworkInfo.ListAvailableNetworks())
+            // Check each configuration
+            foreach (NetworkConfiguration configuration in m_configurations)
             {
-                Debug.WriteLine("Réseau: " + net.Key + " (IP:" + net.Value.IP + ")" + " (DNS:" + net.Value.DNS + ")");
+                log.InfoFormat("Checking config {0}", configuration.Name);
 
-                foreach (KeyValuePair<string, KeyValuePair<NetworkRulesSet, ProxySettings>> proxy in m_proxies)
+                // Check each network
+                foreach (KeyValuePair<string, NetworkInfo> net in NetworkInfo.ListAvailableNetworks())
                 {
-                    RulesChecker rc = new RulesChecker(proxy.Value.Key);
+                    log.InfoFormat("Checking network: {0} (IP: {1}, DNS: {2})", net.Key, string.Join(",", net.Value.NetworkIP), string.Join(",", net.Value.DNS));
 
-                    result = rc.CheckRulesAgainstNetwork(net.Value);
-                    if (result.Match)
+                    RulesChecker rc = new RulesChecker(configuration.NetworkRulesSet);
+
+                    RulesChecker.RulesCheckerResult tempResult = rc.CheckRulesAgainstNetwork(net.Value);
+                    if (tempResult.Match)
                     {
-                        name = proxy.Key;
-                        availableNetwork = net.Value;
-                        networkRulesSet = proxy.Value.Key;
-                        proxySetting = proxy.Value.Value;
-                        break;
+                        log.InfoFormat("Config {0} match #{1}", configuration.Name, countMatches + 1);
+
+                        if (countMatches == 0)
+                        {
+                            result = tempResult;
+                            matchingConfiguration = configuration;
+                            matchingNetwork = net.Value;
+                        }
+
+                        countMatches++;
                     }
                 }
-
-                if (availableNetwork != null) break;
             }
 
-            // Configurer le proxy en conséquence
-            if (proxySetting != null)
+            // Configurer le configuration en conséquence
+            if (matchingConfiguration != null)
             {
-                proxySetting.Configure();
+                matchingConfiguration.ProxySettings.Configure();
             }
 
             // Evénement
             if (ProxyChanged != null)
             {
-                ProxyChanged(name, availableNetwork, proxySetting, result.Reason);
+                ProxyChanged(matchingConfiguration.Name, result.Reason != Reasons.DEFAULT ? matchingNetwork : null, matchingConfiguration.ProxySettings, result.ReasonString);
             }
         }
     }

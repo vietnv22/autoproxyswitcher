@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Deployment.Application;
 using System.Configuration;
+using AutoProxySwitcherLib;
 
 namespace AutoProxySwitcher
 {
@@ -30,15 +31,6 @@ namespace AutoProxySwitcher
 
         private void StatusForm_Load(object sender, EventArgs e)
         {
-            // Ajout de la version dans le titre
-            if (ApplicationDeployment.IsNetworkDeployed)
-            {
-                Text += " " + ApplicationDeployment.CurrentDeployment.CurrentVersion;
-            }
-            else
-            {
-                Text += " " + "version debug";
-            }
         }
 
         private void m_buttonExit_Click(object sender, EventArgs e)
