@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Networks>
+  <Network name="Network Config 3">
+    <Proxy type="Standard" url="http://proxy.local.lan:3128" exceptions="127.0.0.1"/>
+    <Rules>
+      <DNS ip="192.168.1.252" />
+      <Interface name="Wi-fi" />
+    </Rules>
+  </Network>
+</Networks>
+

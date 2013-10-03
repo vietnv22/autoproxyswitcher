@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Networks>
+  <Network name="Network Config 1">
+    <Proxy type="Standard" url="http://proxy.local.lan:3128" />
+    <Rules>
+      <Ping ip="127.0.0.1" />
+    </Rules>
+  </Network>
+</Networks>
+

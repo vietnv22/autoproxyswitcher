@@ -13,11 +13,15 @@ using System.Deployment.Application;
 using System.Collections;
 using System.Collections.Specialized;
 using AutoProxySwitcherLib;
+using log4net;
 
 namespace AutoProxySwitcher
 {
     public partial class SystrayForm : Form
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(SystrayForm));
+
+        private AutoProxySwitcherLib.NetworkChangeDetector m_networkChangeDetector;
         private StatusForm m_statusForm;
 
         public SystrayForm()
@@ -25,9 +29,10 @@ namespace AutoProxySwitcher
             m_networkChangeDetector = new NetworkChangeDetector();
             InitializeComponent();
 
-            m_statusForm = new StatusForm(m_networkChangeDetector);
-            m_statusForm.FormClosing += new FormClosingEventHandler(m_statusForm_FormClosing);
-            Hide();
+
+            // Start monitoring
+            m_networkChangeDetector.ProxyChanged += new NetworkChangeDetector.ProxyChangedEventHandler(m_networkChangeDetector_ProxyChanged);
+            m_networkChangeDetector.StartMonitoring();
         }
 
         void m_statusForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -46,45 +51,97 @@ namespace AutoProxySwitcher
         }
         #endregion
 
+        private void UIA(Action action) { this.Invoke(action); }
+
         private void m_networkChangeDetector_ProxyChanged(string name, NetworkInfo networkInfo, ProxySettings proxySettings, string reason)
         {
+            string info;
+            string detailedInfo;
+
+            log.Info("Proxy Changed");
+
             // Afficher tooltip indiquant disponibilité
             if (networkInfo != null && proxySettings != null)
             {
-                m_notifyIcon.BalloonTipText = String.Format("Configuration \"{0}\" available\nInterface: {1}\naddress(es): {2}\nReason: {3}", name, networkInfo.Name, String.Join(", ", networkInfo.IP), reason);
+                info = String.Format("Configuration \"{0}\" available\nInterface name: {1}\nReason: {2}", name, networkInfo.IfName, reason);
                 m_notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             }
             else if (networkInfo == null)
             {
-                m_notifyIcon.BalloonTipText = String.Format("Configuration \"{0}\" available\nReason: {1}", name, reason);
+                info = String.Format("Configuration \"{0}\" available\nReason: {1}", name, reason);
                 m_notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             }
             else
             {
-                m_notifyIcon.BalloonTipText = String.Format("No ruleNode found, no change");
+                info = String.Format("No rule found, no change");
                 m_notifyIcon.BalloonTipIcon = ToolTipIcon.Warning;
             }
 
-            m_statusForm.Status = "Update date: " + System.DateTime.Now + "\n" + m_notifyIcon.BalloonTipText;
+            m_notifyIcon.BalloonTipText = info;
+
+            detailedInfo = "Update date: " + System.DateTime.Now;
+            detailedInfo += "\n\n" + info;
+
+            if (networkInfo != null)
+            {
+                detailedInfo += "\n\nNetwork details: ";
+                detailedInfo += "\n  Interface name: " + networkInfo.IfName;
+                detailedInfo += "\n  Type: " + networkInfo.Type;
+                detailedInfo += "\n  Description: " + networkInfo.Description;
+                detailedInfo += "\n  IP(s): " + String.Join(", ", networkInfo.IP);
+                detailedInfo += "\n  Network(s): " + String.Join(", ", networkInfo.NetworkIP);
+                detailedInfo += "\n  DNS: " + String.Join(", ", networkInfo.DNS);
+            }
+
+            if (proxySettings != null)
+            {
+                detailedInfo += "\n\nProxy details: ";
+                detailedInfo += "\n  " + proxySettings;
+            }
+
+            if (InvokeRequired)
+            {
+                UIA(() => m_statusForm.Status = detailedInfo);
+            }
+            else
+            {
+                m_statusForm.Status = detailedInfo;
+            }
+
             m_notifyIcon.ShowBalloonTip(3000);
         }
 
         private void SystrayForm_Load(object sender, EventArgs e)
         {
-            string rulesFile = System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData)
-                + "\\AutoProxySwitcher\\"
+            string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData) + "\\AutoProxySwitcher\\";
+            System.IO.Directory.CreateDirectory(folder);
+            string rulesFile = folder
                 + Environment.ExpandEnvironmentVariables(System.Configuration.ConfigurationManager.AppSettings["RulesFile"]);
+
+            log.Info("rules file expected location is " + rulesFile);
 
             // Create default rules files if it doesn't exists
             if (!System.IO.File.Exists(rulesFile))
             {
-                System.IO.File.Copy("Examples/rules.xml", rulesFile);
+                log.Info("rules file doesn't exists, creating one from example");
+
+                try
+                {
+                    System.IO.File.Copy("Examples/rules.xml", rulesFile);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("Failed to create rules file", ex);
+                    throw;
+                }
             }
 
             // Charger les règles
             m_networkChangeDetector.LoadConfigurations(rulesFile);
-            m_networkChangeDetector.ProxyChanged += new NetworkChangeDetector.ProxyChangedEventHandler(m_networkChangeDetector_ProxyChanged);
-            m_networkChangeDetector.StartMonitor();
+
+            // Build status form
+            m_statusForm = new StatusForm(m_networkChangeDetector);
+            m_statusForm.FormClosing += new FormClosingEventHandler(m_statusForm_FormClosing);
 
             m_statusForm.comboProxy.Items.Add("auto");
             foreach (NetworkConfiguration configuration in m_networkChangeDetector.Configurations)

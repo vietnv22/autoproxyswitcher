@@ -97,7 +97,6 @@
         internal System.Windows.Forms.NotifyIcon m_notifyIcon;
         private System.Windows.Forms.ContextMenuStrip m_contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem m_toolStripMenuItemQuit;
-        private AutoProxySwitcherLib.NetworkChangeDetector m_networkChangeDetector;
         private System.Windows.Forms.ToolStripMenuItem statutToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 

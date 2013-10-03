@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Networks>
-  <!-- Uses given proxy PAC file when DNS IP is "10.0.0.1" or when subnet is "10.0.0.0/8" -->
+  <!-- Simple rule.
+       Uses given proxy PAC file when DNS IP is "10.0.0.1" or when subnet is "10.0.0.0/8" -->
   <Network name="Network Config 1">
     <Proxy type="PacFile" url="http://proxy.local.lan/proxy.pac" />
     <Rules>
@@ -9,7 +10,8 @@
     </Rules>
   </Network>
   
-  <!-- Uses given proxy when computer IP is "10.0.0.1" or "10.0.0.2" -->
+  <!-- Simple rule.
+       Uses given proxy when computer IP is "10.0.0.1" or "10.0.0.2" -->
   <Network name="Network Config 2">
     <Proxy type="Standard" url="http://proxy.local.lan:3128" />
     <Rules>
@@ -17,15 +19,31 @@
     </Rules>
   </Network>
 
-   <!-- Uses given proxy when computer IP is "10.0.0.1" or "10.0.0.2" -->
+   <!-- Simple rule.
+        Uses given proxy when computer IP is "10.0.0.1" or "10.0.0.2" -->
   <Network name="Network Config 3">
     <Proxy type="Standard" url="http://proxy.local.lan:3128" />
     <Rules>
       <DNS ip="192.168.1.254" />
+      <Interface name="Wi-fi" />
     </Rules>
   </Network>
 
-  <!-- By default (there's no rules), do not use any proxy -->
+  <!-- Complex rule (boolean algebra) -->
+  <Network name="Network Config 3">
+    <Proxy type="Standard" url="http://proxy.local.lan:3128" exceptions="127.0.0.1" />
+    <Rules>
+      <And>
+        <DNS ip="192.168.1.254" />
+        <Interface name="Wi-fi" />
+        <Not>
+          <Interface name="Toto"/>
+        </Not>
+      </And>
+    </Rules>
+  </Network>
+  
+  <!-- By default (no rules), do not use any proxy -->
   <Network name="Default Config">
     <Proxy type="None" />
   </Network>

@@ -1,0 +1,4 @@
+C:\Users\Tof\Dev\autoproxyswitcher\AutoProxySwitcherTests\Fakes\AutoProxySwitcherLib.fakes : warning : Cannot generate stub for AutoProxySwitcherLib.Reasons: type is a value type.
+C:\Users\Tof\Dev\autoproxyswitcher\AutoProxySwitcherTests\Fakes\AutoProxySwitcherLib.fakes : warning : Cannot generate shim for AutoProxySwitcherLib.NetworkChangeDetector+<>c__DisplayClass2: type is not supported because of internal limitations.
+C:\Users\Tof\Dev\autoproxyswitcher\AutoProxySwitcherTests\Fakes\AutoProxySwitcherLib.fakes : warning : Cannot generate shim for AutoProxySwitcherLib.NetworkChangeDetector+ProxyChangedEventHandler: type is a delegate.
+C:\Users\Tof\Dev\autoproxyswitcher\AutoProxySwitcherTests\Fakes\AutoProxySwitcherLib.fakes : warning : Cannot generate shim for AutoProxySwitcherLib.Reasons: type is an enum.

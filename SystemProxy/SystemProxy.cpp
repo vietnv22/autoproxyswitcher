@@ -6,87 +6,97 @@
 
 namespace SystemProxy {
 
-    void ProxyConfigurator::SetProxyPac(String ^pacFile)
-    {
-        INTERNET_PER_CONN_OPTION_LIST    List;
-        INTERNET_PER_CONN_OPTION         Option[2]; 
-        unsigned long                    nSize = sizeof(INTERNET_PER_CONN_OPTION_LIST); 
-        const pin_ptr<const wchar_t> ppchar = PtrToStringChars(pacFile);
+	void ProxyConfigurator::SetProxyPac(String ^pacFile)
+	{
+		INTERNET_PER_CONN_OPTION_LIST    List;
+		INTERNET_PER_CONN_OPTION         Option[2]; 
+		unsigned long                    nSize = sizeof(INTERNET_PER_CONN_OPTION_LIST); 
+		const pin_ptr<const wchar_t> ppchar = PtrToStringChars(pacFile);
 
-        Option[0].dwOption = INTERNET_PER_CONN_AUTOCONFIG_URL; 
-        Option[0].Value.pszValue = _wcsdup(ppchar);
+		Option[0].dwOption = INTERNET_PER_CONN_AUTOCONFIG_URL; 
+		Option[0].Value.pszValue = _wcsdup(ppchar);
 
-        Option[1].dwOption = INTERNET_PER_CONN_FLAGS; 
-        Option[1].Value.dwValue = PROXY_TYPE_AUTO_PROXY_URL; 
+		Option[1].dwOption = INTERNET_PER_CONN_FLAGS; 
+		Option[1].Value.dwValue = PROXY_TYPE_AUTO_PROXY_URL; 
 
-        List.dwSize = sizeof(INTERNET_PER_CONN_OPTION_LIST); 
-        List.pszConnection = NULL;
-        List.dwOptionCount = sizeof(Option)/sizeof(*Option); 
-        List.dwOptionError = 0;
-        List.pOptions = Option;
+		List.dwSize = sizeof(INTERNET_PER_CONN_OPTION_LIST); 
+		List.pszConnection = NULL;
+		List.dwOptionCount = sizeof(Option)/sizeof(*Option); 
+		List.dwOptionError = 0;
+		List.pOptions = Option;
 
-        if(!InternetSetOption(NULL, INTERNET_OPTION_PER_CONNECTION_OPTION, &List, nSize)) 
-        {
-            free(Option[0].Value.pszValue);
-            throw gcnew Exception("InternetSetOption: " + GetLastError());
-        }
+		if(!InternetSetOption(NULL, INTERNET_OPTION_PER_CONNECTION_OPTION, &List, nSize)) 
+		{
+			free(Option[0].Value.pszValue);
+			throw gcnew Exception("InternetSetOption: " + GetLastError());
+		}
 
-        free(Option[0].Value.pszValue);
-    }
+		free(Option[0].Value.pszValue);
+	}
 
-    void ProxyConfigurator::SetProxy(String ^address)
-    {
-        INTERNET_PER_CONN_OPTION_LIST    List;
-        INTERNET_PER_CONN_OPTION         Option[2]; 
-        unsigned long                    nSize = sizeof(INTERNET_PER_CONN_OPTION_LIST); 
-        const pin_ptr<const wchar_t> ppchar = PtrToStringChars(address);
+	void ProxyConfigurator::SetProxy(String ^address, String ^exceptions)
+	{
+		INTERNET_PER_CONN_OPTION_LIST    List;
+		INTERNET_PER_CONN_OPTION         Option[3];
+		unsigned long                    nSize = sizeof(INTERNET_PER_CONN_OPTION_LIST); 
+		pin_ptr<const wchar_t> ppAddress = PtrToStringChars(address);
+		pin_ptr<const wchar_t> ppExceptions = nullptr;
 
-        Option[0].dwOption = INTERNET_PER_CONN_PROXY_SERVER;
-        Option[0].Value.pszValue = _wcsdup(ppchar);
+		int optionsId = 0;
 
-        Option[1].dwOption = INTERNET_PER_CONN_FLAGS;
-        Option[1].Value.dwValue = PROXY_TYPE_PROXY;
-        Option[1].Value.dwValue |= PROXY_TYPE_DIRECT;
+		Option[optionsId].dwOption = INTERNET_PER_CONN_PROXY_SERVER;
+		Option[optionsId].Value.pszValue = (wchar_t*)ppAddress;
+		optionsId++;
 
-        List.dwSize = sizeof(INTERNET_PER_CONN_OPTION_LIST);
-        List.pszConnection = NULL;
-        List.dwOptionCount = sizeof(Option)/sizeof(*Option); 
-        List.dwOptionError = 0;
-        List.pOptions = Option;
+		if (exceptions != nullptr)
+		{
+			ppExceptions = PtrToStringChars(exceptions);
+			Option[optionsId].dwOption = INTERNET_PER_CONN_PROXY_BYPASS;
+			Option[optionsId].Value.pszValue = (wchar_t*)ppExceptions;
+			optionsId++;
+		}
 
-        if(!InternetSetOption(NULL, INTERNET_OPTION_PER_CONNECTION_OPTION, &List, nSize)) 
-        {
-            free(Option[0].Value.pszValue);
-            throw gcnew Exception("InternetSetOption: " + GetLastError());
-        }
+		Option[optionsId].dwOption = INTERNET_PER_CONN_FLAGS;
+		Option[optionsId].Value.dwValue = PROXY_TYPE_PROXY;
+		Option[optionsId].Value.dwValue |= PROXY_TYPE_DIRECT;
+		optionsId++;
 
-        free(Option[0].Value.pszValue);
-    }
+		List.dwSize = sizeof(INTERNET_PER_CONN_OPTION_LIST);;
+		List.pszConnection = NULL;
+		List.dwOptionCount = optionsId; 
+		List.dwOptionError = 0;
+		List.pOptions = Option;
 
-    void ProxyConfigurator::ResetProxy()
-    {
-        //conn_name: active connection name. 
-        INTERNET_PER_CONN_OPTION_LIST list;
-        INTERNET_PER_CONN_OPTION Option[1];
+		if(!InternetSetOption(NULL, INTERNET_OPTION_PER_CONNECTION_OPTION, &List, nSize)) 
+		{
+			throw gcnew Exception("InternetSetOption: " + GetLastError());
+		}
+	}
 
-        DWORD   dwBufSize = sizeof(list);
+	void ProxyConfigurator::ResetProxy()
+	{
+		//conn_name: active connection name. 
+		INTERNET_PER_CONN_OPTION_LIST list;
+		INTERNET_PER_CONN_OPTION Option[1];
 
-        list.dwSize = sizeof(list);
-        list.pszConnection = NULL;
-        list.dwOptionCount = sizeof(Option)/sizeof(*Option);
-        list.pOptions = Option;
+		DWORD   dwBufSize = sizeof(list);
 
-        // Set flags.
-        list.pOptions[0].dwOption = INTERNET_PER_CONN_FLAGS;
-        list.pOptions[0].Value.dwValue = PROXY_TYPE_DIRECT ;
+		list.dwSize = sizeof(list);
+		list.pszConnection = NULL;
+		list.dwOptionCount = sizeof(Option)/sizeof(*Option);
+		list.pOptions = Option;
 
-        if (!InternetSetOption(NULL, INTERNET_OPTION_PER_CONNECTION_OPTION, &list, dwBufSize))
-        {
-            throw gcnew Exception("InternetSetOption: " + GetLastError());
-        }
+		// Set flags.
+		list.pOptions[0].dwOption = INTERNET_PER_CONN_FLAGS;
+		list.pOptions[0].Value.dwValue = PROXY_TYPE_DIRECT ;
 
-        // Tell IE the settings changed
-        InternetSetOption(NULL, INTERNET_OPTION_SETTINGS_CHANGED, NULL, 0);
-        InternetSetOption(NULL, INTERNET_OPTION_REFRESH , NULL, 0);
-    }
+		if (!InternetSetOption(NULL, INTERNET_OPTION_PER_CONNECTION_OPTION, &list, dwBufSize))
+		{
+			throw gcnew Exception("InternetSetOption: " + GetLastError());
+		}
+
+		// Tell IE the settings changed
+		InternetSetOption(NULL, INTERNET_OPTION_SETTINGS_CHANGED, NULL, 0);
+		InternetSetOption(NULL, INTERNET_OPTION_REFRESH , NULL, 0);
+	}
 }

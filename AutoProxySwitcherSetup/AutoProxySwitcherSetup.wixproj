@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
-    <MyProductVersion>1.0.14.0</MyProductVersion>
+    <MyMainProductVersion>1.1.0</MyMainProductVersion>
+    <MyProductVersion>$(MyMainProductVersion).0</MyProductVersion>
+    <MyProductVersionName>$(MyMainProductVersion)-beta</MyProductVersionName>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -18,14 +20,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug;version=$(MyProductVersion)</DefineConstants>
+    <DefineConstants>Debug;version=$(MyProductVersion);versionname=$(MyProductVersionName)</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <WixVariables>
     </WixVariables>
-    <DefineConstants>version=$(MyProductVersion)</DefineConstants>
+    <DefineConstants>version=$(MyProductVersion);versionname=$(MyProductVersionName)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Product.wxs" />
@@ -38,6 +40,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
     <WixExtension Include="WixUtilExtension">
       <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
       <Name>WixUtilExtension</Name>
@@ -53,10 +59,10 @@
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
     <PostBuildEvent>:: Rename file with version
-copy !(TargetPath) $(TargetDir)\$(TargetName)_$(MyProductVersion)$(TargetExt)</PostBuildEvent>
+copy !(TargetPath) $(TargetDir)\$(TargetName)_$(MyProductVersionName)$(TargetExt)</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>echo Building version: $(MyProductVersion)</PreBuildEvent>
+    <PreBuildEvent>echo Building version: $(MyProductVersionName)</PreBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

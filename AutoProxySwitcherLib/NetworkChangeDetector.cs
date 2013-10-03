@@ -15,8 +15,9 @@ namespace AutoProxySwitcherLib
         private static readonly ILog log = LogManager.GetLogger(typeof(NetworkChangeDetector));
 
         private List<NetworkConfiguration> m_configurations;
+        private IList<NetworkInfo> _currentNetworks;
 
-        public delegate void ProxyChangedEventHandler(string name, NetworkInfo networkInfo, ProxySettings proxySettings, string reason);
+        public delegate void ProxyChangedEventHandler(string configurationName, NetworkInfo networkInfo, ProxySettings proxySettings, string reason);
 
         public event ProxyChangedEventHandler ProxyChanged;
 
@@ -29,23 +30,58 @@ namespace AutoProxySwitcherLib
             set { m_configurations = value; }
         }
 
-        /// <summary>
-        /// Démarrer le monitoring de changement de réseaux
-        /// </summary>
-        public void StartMonitor()
+        public IList<NetworkInfo> CurrentNetworks
         {
-            NetworkChange.NetworkAddressChanged += new NetworkAddressChangedEventHandler(AddressChangedCallback);
-            log.Info("Listening for address changes");
-            SetProxyAccordingToNetwork();
+            get { return _currentNetworks;  }
         }
 
         /// <summary>
-        /// Définir le configuration
+        /// Starts monitoring for changes
         /// </summary>
-        /// <param name="networkNode">Nom du réseau, mettre null pour autodétection</param>
-        public void SetProxy(string name)
+        public void StartMonitoring(string filename = null)
         {
-            if (name == null)
+            log.Info("StartMonitoring");
+            if (filename != null)
+            {
+                LoadConfigurations(filename);
+            }
+
+            // Start listening for changes
+            log.Info("Listening for address changes");
+            try
+            {
+                NetworkChange.NetworkAddressChanged += AddressChangedCallback;
+            }
+            catch (Exception ex)
+            {
+                log.Error("Failed to listen for changes", ex);
+            }
+
+            // Force first check (in a thread, since it can last some time
+            log.Info("Starting first thread");
+            System.Threading.Thread thread = new System.Threading.Thread(() => { log.Info("First thread"); AddressChangedCallback(null, null); });
+            thread.Start();
+        }
+
+        /// <summary>
+        /// Loads configurations from file
+        /// </summary>
+        /// <returns></returns>
+        public void LoadConfigurations(string fileName)
+        {
+            log.Info("Loading configurations from file " + fileName);
+            m_configurations = NetworkConfigurations.FromFile(fileName);
+        }
+
+        /// <summary>
+        /// Manually set configuration
+        /// </summary>
+        /// <param name="name">Configuration name, set null to autodetect</param>
+        public void SetConfiguration(string name)
+        {
+            log.Info("Set configuration " + name);
+
+            if (name == null || name == "auto")
             {
                 SetProxyAccordingToNetwork();
             }
@@ -63,63 +99,49 @@ namespace AutoProxySwitcherLib
         }
 
         /// <summary>
-        /// Loads configurations from file
+        /// Returns the configuration that matches the given network
         /// </summary>
-        /// <returns></returns>
-        public void LoadConfigurations(string fileName)
+        /// <param name="configurations"></param>
+        public NetworkConfiguration FindMatchingConfiguration(IList<NetworkInfo> networks, out RulesChecker.RulesCheckerResult result, out NetworkInfo matchingNetwork)
         {
-            System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
-            doc.Load(fileName);
-            List<NetworkConfiguration> configurations = new List<NetworkConfiguration>();
+            int countMatches = 0;
+            NetworkConfiguration matchingConfiguration = null;
+            result = null;
+            matchingNetwork = null;
 
-            log.Debug("Loading configurations");
-
-            // Chargement des règles
-            foreach (System.Xml.XmlNode networkNode in doc.SelectNodes("/Networks/Network"))
+            // Check each configuration
+            foreach (NetworkConfiguration configuration in m_configurations)
             {
-                NetworkRulesSet networkRulesSet = new NetworkRulesSet();
-                ProxySettings proxySettings = null;
-
-                foreach (System.Xml.XmlNode ruleNode in networkNode.SelectNodes("Rules/*"))
+                using (log4net.ThreadContext.Stacks["NDC"].Push(String.Format("config {0}", configuration.Name)))
                 {
-                    if (ruleNode.Name == "Subnet")
+                    log.InfoFormat("Checking config {0}", configuration.Name); 
+
+                    // Check each network
+                    foreach (NetworkInfo net in networks)
                     {
-                        networkRulesSet.Add(new NetworkRuleSubnet(ruleNode.Attributes["ip"].Value));
-                    }
-                    else if (ruleNode.Name == "DNS")
-                    {
-                        networkRulesSet.Add(new NetworkRuleDNS(ruleNode.Attributes["ip"].Value));
+                        log.InfoFormat("Checking network: {0} (IP: {1}, DNS: {2})", net.IfName, string.Join(",", net.NetworkIP), string.Join(",", net.DNS));
+
+                        RulesChecker rc = new RulesChecker(configuration.NetworkRulesSet);
+
+                        RulesChecker.RulesCheckerResult tempResult = rc.CheckRulesAgainstNetwork(net);
+                        if (tempResult.Match)
+                        {
+                            log.InfoFormat("Match #{1}: config {0}", configuration.Name, countMatches + 1);
+
+                            if (countMatches == 0)
+                            {
+                                result = tempResult;
+                                matchingConfiguration = configuration;
+                                matchingNetwork = net;
+                            }
+
+                            countMatches++;
+                        }
                     }
                 }
-
-                // Chargement des paramètres du configuration
-                System.Xml.XmlNode proxyNode = networkNode.SelectSingleNode("Proxy");
-                
-                switch (proxyNode.Attributes["type"].Value)
-                {
-                    case "PacFile":
-                        proxySettings = new ProxyPACSettings(proxyNode.Attributes["url"].Value);
-                        break;
-
-                    case "Standard":
-                        proxySettings = new StandardProxySettings(proxyNode.Attributes["url"].Value);
-                        break;
-
-                    case "None":
-                        proxySettings = new NoProxySettings();
-                        break;
-
-                    default:
-                        throw new Exception("Unknown ProxyType" + proxyNode.Attributes["type"].Value);
-                }
-
-                // Ajouter la configuration
-                configurations.Add(new NetworkConfiguration(networkNode.Attributes["name"].Value, networkRulesSet, proxySettings));
             }
 
-            log.DebugFormat("Configurations loaded: {0}", configurations.Count);
-
-            m_configurations = configurations;
+            return matchingConfiguration;
         }
 
         /// <summary>
@@ -130,45 +152,36 @@ namespace AutoProxySwitcherLib
         /// <param name="e"></param>
         private void AddressChangedCallback(object sender, EventArgs e)
         {
-            log.Info("Adress changed");
-            SetProxyAccordingToNetwork();
+            try
+            {
+                log.Info("Address changed");
+                SetProxyAccordingToNetwork();
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error", ex);
+            }
         }
 
+        /// <summary>
+        /// Sets proxy according to current available networks and configurations rules
+        /// </summary>
         private void SetProxyAccordingToNetwork()
         {
             NetworkInfo matchingNetwork = null;
             NetworkConfiguration matchingConfiguration = null;
             RulesChecker.RulesCheckerResult result = new RulesChecker.RulesCheckerResult();
-            int countMatches = 0;
 
-            // Check each configuration
-            foreach (NetworkConfiguration configuration in m_configurations)
+            // Get current networks
+            IList<NetworkInfo> currentNetworks = NetworkManager.ListAvailableNetworks();
+            _currentNetworks = currentNetworks;
+            foreach (var networkInfo in currentNetworks)
             {
-                log.InfoFormat("Checking config {0}", configuration.Name);
-
-                // Check each network
-                foreach (KeyValuePair<string, NetworkInfo> net in NetworkInfo.ListAvailableNetworks())
-                {
-                    log.InfoFormat("Checking network: {0} (IP: {1}, DNS: {2})", net.Key, string.Join(",", net.Value.NetworkIP), string.Join(",", net.Value.DNS));
-
-                    RulesChecker rc = new RulesChecker(configuration.NetworkRulesSet);
-
-                    RulesChecker.RulesCheckerResult tempResult = rc.CheckRulesAgainstNetwork(net.Value);
-                    if (tempResult.Match)
-                    {
-                        log.InfoFormat("Config {0} match #{1}", configuration.Name, countMatches + 1);
-
-                        if (countMatches == 0)
-                        {
-                            result = tempResult;
-                            matchingConfiguration = configuration;
-                            matchingNetwork = net.Value;
-                        }
-
-                        countMatches++;
-                    }
-                }
+                log.Debug("Network " + networkInfo);
             }
+
+            // Find matching configuration
+            matchingConfiguration = FindMatchingConfiguration(currentNetworks, out result, out matchingNetwork);
 
             // Configurer le configuration en conséquence
             if (matchingConfiguration != null)
