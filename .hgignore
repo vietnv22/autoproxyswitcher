@@ -4,6 +4,7 @@ Debug/*
 *.user
 */Release/*
 Release/*
+packages/*
 syntax: glob
 obj/*
 syntax: glob

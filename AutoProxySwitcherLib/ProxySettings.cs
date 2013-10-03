@@ -30,21 +30,52 @@ namespace AutoProxySwitcherLib
             SystemProxy.ProxyConfigurator pc = new SystemProxy.ProxyConfigurator();
             pc.SetProxyPac(pacFile);
         }
+
+        public override string ToString()
+        {
+            return "PAC file " + pacFile;
+        }
     }
 
     public class StandardProxySettings : ProxySettings
     {
         private string proxyAddress;
+        private string exceptions;
 
-        public StandardProxySettings(string proxyAddress)
+        /// <summary>
+        /// Creates a standard proxy setting
+        /// </summary>
+        /// <param name="proxyAddress"></param>
+        /// <param name="exceptions">null if no change required</param>
+        public StandardProxySettings(string proxyAddress, string exceptions)
         {
             this.proxyAddress = proxyAddress;
+            this.exceptions = exceptions;
         }
 
         public override void Configure()
         {
             SystemProxy.ProxyConfigurator pc = new SystemProxy.ProxyConfigurator();
-            pc.SetProxy(proxyAddress);
+            pc.SetProxy(proxyAddress, exceptions);
+        }
+
+        public override string ToString()
+        {
+            string proxyStr = proxyAddress;
+            if (exceptions == null)
+            {
+                proxyStr += " without exceptions";
+            }
+            else if (exceptions == "")
+            {
+                proxyStr += " and clear exceptions";
+            }
+            else
+            {
+                proxyStr += " with exceptions";
+            }
+
+            return proxyStr;
         }
     }
 
@@ -54,6 +85,11 @@ namespace AutoProxySwitcherLib
         {
             SystemProxy.ProxyConfigurator pc = new SystemProxy.ProxyConfigurator();
             pc.ResetProxy();
+        }
+
+        public override string ToString()
+        {
+            return "No proxy";
         }
     }
 }

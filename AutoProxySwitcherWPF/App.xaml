@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application x:Name="MyApp" xmlns:p1="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:v="clr-namespace:AutoProxySwitcherWPF.View" xmlns:tb="http://www.hardcodet.net/taskbar" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="AutoProxySwitcherWPF.App" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:vm="clr-namespace:AutoProxySwitcherWPF.ViewModel" mc:Ignorable="d" ShutdownMode="OnExplicitShutdown">
+
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ViewModelLocator x:Key="Locator" p7:IsDataSource="True" xmlns:p7="http://schemas.microsoft.com/expression/blend/2008" xmlns="clr-namespace:AutoProxySwitcherWPF.ViewModel" />
+            <tb:TaskbarIcon x:Key="MyNotifyIcon" DataContext="{Binding Source={StaticResource Locator}, Path=Main}" x:Name="MyNotifyIcon" IconSource="View/Icons/network.ico" ToolTipText="AutoProxySwitcher">
+                <tb:TaskbarIcon.ContextMenu>
+                    <ContextMenu >
+                        <MenuItem Header="Exit" Command="{Binding Path=ExitCommand}" />
+                    </ContextMenu>
+                </tb:TaskbarIcon.ContextMenu>
+            </tb:TaskbarIcon>
+            <v:MainWindow x:Key="MainWindow" />
+        </ResourceDictionary>
+        
+    </Application.Resources>
+</Application>

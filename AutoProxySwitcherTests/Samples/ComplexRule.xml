@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Networks>
+  <Network name="Network Config 3">
+    <Proxy type="Standard" url="http://proxy.local.lan:3128" />
+    <Rules>
+      <Or>
+        <DNS ip="192.168.1.254" />
+        <Not>
+          <Interface name="Test2"/>
+        </Not>
+      </Or>
+    </Rules>
+  </Network>
+</Networks>

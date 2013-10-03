@@ -9,7 +9,7 @@ namespace SystemProxy {
 	public ref class ProxyConfigurator
 	{
         public :void SetProxyPac(String ^pacFile);
-        public :void ProxyConfigurator::SetProxy(String ^address);
+        public :void ProxyConfigurator::SetProxy(String ^address, String ^exceptions);
         public :void ResetProxy();
 	};
 }

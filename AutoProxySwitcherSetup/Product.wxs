@@ -5,8 +5,9 @@
 <?define upgradeCode= "{728F0A1C-9210-4661-99CD-F5644F01ABBB}"?> <!-- doesn't change -->
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-  <Product Id="$(var.productCode)" Name="$(var.projectName) $(var.version)" Language="1033" Version="$(var.version)" Manufacturer="$(var.author)" UpgradeCode="$(var.upgradeCode)">
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <Product Id="$(var.productCode)" Name="$(var.projectName) $(var.versionname)" Language="1033" Version="$(var.version)" Manufacturer="$(var.author)" UpgradeCode="$(var.upgradeCode)">
     <Package InstallerVersion="300" Compressed="yes" />
 
     <!-- Force close previous version -->
@@ -53,7 +54,6 @@
     <DirectoryRef Id="MyAppFolder">
       <Component Id="MyAppFolderId" Guid="{BB791787-4632-45C0-88C0-E3FABCC502CE}">
         <CreateFolder />
-        <File Id="rules.xml" Source="$(var.AutoProxySwitcher.TargetDir)Examples\rules.xml"/>
       </Component>
     </DirectoryRef>
 
@@ -126,13 +126,19 @@
     <!-- Remove previous version -->
     <InstallExecuteSequence>
       <RemoveExistingProducts After="InstallInitialize"/>
+      <!-- RemoveExistingProducts after InstallFiles ==> ensure files are not replaced if they have been changed, event configuration files (which are components and defined as key path of the components) -->
+      <!--<RemoveExistingProducts After="InstallFiles"/>-->
     </InstallExecuteSequence>
 
-    <!-- Avoid installing over newer version -->
+    <!-- Avoid installing over same or newer version -->
     <Condition Message="A later version of [ProductName] is already installed. Setup will now exit.">
       NOT NEWERVERSIONDETECTED OR Installed
     </Condition>
 
+    <Condition Message="This application requires .NET Framework 4.0. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK40FULL]]>
+    </Condition>
+    
     <!-- Property containing install location choosed by user -->
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
 
@@ -145,6 +151,8 @@
         DllEntry="WixShellExec"
         Impersonate="yes" />
 
+    <PropertyRef Id="NETFRAMEWORK40FULL"/>
+    
     <!-- Property containing autostart flag -->
     <Property Id="AUTOSTART">1</Property>
 

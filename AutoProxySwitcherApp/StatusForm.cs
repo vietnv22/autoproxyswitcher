@@ -18,19 +18,14 @@ namespace AutoProxySwitcher
 
         public string Status
         {
-            get { return m_labelStatus.Text; }
-            set { m_labelStatus.Text = value; }
+            get { return m_status.Text; }
+            set { m_status.Text = value; }
         }
 
         public StatusForm(NetworkChangeDetector networkChangeDetector)
         {
             InitializeComponent();
-
             m_networkChangeDetector = networkChangeDetector;
-        }
-
-        private void StatusForm_Load(object sender, EventArgs e)
-        {
         }
 
         private void m_buttonExit_Click(object sender, EventArgs e)
@@ -42,11 +37,11 @@ namespace AutoProxySwitcher
         {
             if (comboProxy.Text == "auto")
             {
-                m_networkChangeDetector.SetProxy(null);
+                m_networkChangeDetector.SetConfiguration(null);
             }
             else
             {
-                m_networkChangeDetector.SetProxy(comboProxy.Text);
+                m_networkChangeDetector.SetConfiguration(comboProxy.Text);
             }
         }
     }

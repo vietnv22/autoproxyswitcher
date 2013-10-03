@@ -1,0 +1,914 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoProxySwitcherLib.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector">
+            <summary>Shim type of AutoProxySwitcherLib.NetworkChangeDetector</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.#ctor(AutoProxySwitcherLib.NetworkChangeDetector)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AddressChangedCallbackObjectEventArgs">
+            <summary>Sets the shim of NetworkChangeDetector.AddressChangedCallback(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.ConfigurationsGet">
+            <summary>Sets the shim of NetworkChangeDetector.get_Configurations()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.ConfigurationsSetListOfNetworkConfiguration">
+            <summary>Sets the shim of NetworkChangeDetector.set_Configurations(List`1&lt;NetworkConfiguration&gt; value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.Constructor">
+            <summary>Sets the shim of NetworkChangeDetector.NetworkChangeDetector()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.CurrentNetworksGet">
+            <summary>Sets the shim of NetworkChangeDetector.get_CurrentNetworks()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.LoadConfigurationsString">
+            <summary>Sets the shim of NetworkChangeDetector.LoadConfigurations(String fileName)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.ProxyChangedAddNetworkChangeDetectorProxyChangedEventHandler">
+            <summary>Sets the shim of NetworkChangeDetector.add_ProxyChanged(ProxyChangedEventHandler value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.ProxyChangedRemoveNetworkChangeDetectorProxyChangedEventHandler">
+            <summary>Sets the shim of NetworkChangeDetector.remove_ProxyChanged(ProxyChangedEventHandler value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.SetProxyAccordingToNetwork">
+            <summary>Sets the shim of NetworkChangeDetector.SetProxyAccordingToNetwork()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.SetProxyString">
+            <summary>Sets the shim of NetworkChangeDetector.SetProxy(String name)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.StartMonitoringString">
+            <summary>Sets the shim of NetworkChangeDetector.StartMonitoring(String filename)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.StaticConstructor">
+            <summary>Sets the shim of NetworkChangeDetector.NetworkChangeDetector()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances.AddressChangedCallbackObjectEventArgs">
+            <summary>Sets the shim of NetworkChangeDetector.AddressChangedCallback(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances.ConfigurationsGet">
+            <summary>Sets the shim of NetworkChangeDetector.get_Configurations()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances.ConfigurationsSetListOfNetworkConfiguration">
+            <summary>Sets the shim of NetworkChangeDetector.set_Configurations(List`1&lt;NetworkConfiguration&gt; value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances.CurrentNetworksGet">
+            <summary>Sets the shim of NetworkChangeDetector.get_CurrentNetworks()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances.LoadConfigurationsString">
+            <summary>Sets the shim of NetworkChangeDetector.LoadConfigurations(String fileName)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances.ProxyChangedAddNetworkChangeDetectorProxyChangedEventHandler">
+            <summary>Sets the shim of NetworkChangeDetector.add_ProxyChanged(ProxyChangedEventHandler value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances.ProxyChangedRemoveNetworkChangeDetectorProxyChangedEventHandler">
+            <summary>Sets the shim of NetworkChangeDetector.remove_ProxyChanged(ProxyChangedEventHandler value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances.SetProxyAccordingToNetwork">
+            <summary>Sets the shim of NetworkChangeDetector.SetProxyAccordingToNetwork()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances.SetProxyString">
+            <summary>Sets the shim of NetworkChangeDetector.SetProxy(String name)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkChangeDetector.AllInstances.StartMonitoringString">
+            <summary>Sets the shim of NetworkChangeDetector.StartMonitoring(String filename)</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration">
+            <summary>Shim type of AutoProxySwitcherLib.NetworkConfiguration</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.#ctor(AutoProxySwitcherLib.NetworkConfiguration)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.ConstructorStringNetworkRulesSetProxySettings">
+            <summary>Sets the shim of NetworkConfiguration.NetworkConfiguration(String name, NetworkRulesSet networkRulesSet, ProxySettings proxySettings)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.NameGet">
+            <summary>Sets the shim of NetworkConfiguration.get_Name()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.NameSetString">
+            <summary>Sets the shim of NetworkConfiguration.set_Name(String value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.NetworkRulesSetGet">
+            <summary>Sets the shim of NetworkConfiguration.get_NetworkRulesSet()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.NetworkRulesSetSetNetworkRulesSet">
+            <summary>Sets the shim of NetworkConfiguration.set_NetworkRulesSet(NetworkRulesSet value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.ProxySettingsGet">
+            <summary>Sets the shim of NetworkConfiguration.get_ProxySettings()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.ProxySettingsSetProxySettings">
+            <summary>Sets the shim of NetworkConfiguration.set_ProxySettings(ProxySettings value)</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.AllInstances.NameGet">
+            <summary>Sets the shim of NetworkConfiguration.get_Name()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.AllInstances.NameSetString">
+            <summary>Sets the shim of NetworkConfiguration.set_Name(String value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.AllInstances.NetworkRulesSetGet">
+            <summary>Sets the shim of NetworkConfiguration.get_NetworkRulesSet()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.AllInstances.NetworkRulesSetSetNetworkRulesSet">
+            <summary>Sets the shim of NetworkConfiguration.set_NetworkRulesSet(NetworkRulesSet value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.AllInstances.ProxySettingsGet">
+            <summary>Sets the shim of NetworkConfiguration.get_ProxySettings()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkConfiguration.AllInstances.ProxySettingsSetProxySettings">
+            <summary>Sets the shim of NetworkConfiguration.set_ProxySettings(ProxySettings value)</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimNetworkInfo">
+            <summary>Shim type of AutoProxySwitcherLib.NetworkInfo</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.#ctor(AutoProxySwitcherLib.NetworkInfo)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.Constructor">
+            <summary>Sets the shim of NetworkInfo.NetworkInfo()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.DNSGet">
+            <summary>Sets the shim of NetworkInfo.get_DNS()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.DNSSetListOfString">
+            <summary>Sets the shim of NetworkInfo.set_DNS(List`1&lt;String&gt; value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.GetNetworkAddressAsStringIPAddressIPAddress">
+            <summary>Sets the shim of NetworkInfo.GetNetworkAddressAsString(IPAddress address, IPAddress mask)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.IPGet">
+            <summary>Sets the shim of NetworkInfo.get_IP()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.IPSetListOfString">
+            <summary>Sets the shim of NetworkInfo.set_IP(List`1&lt;String&gt; value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.ListAvailableNetworks">
+            <summary>Sets the shim of NetworkInfo.ListAvailableNetworks()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.NameGet">
+            <summary>Sets the shim of NetworkInfo.get_Name()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.NameSetString">
+            <summary>Sets the shim of NetworkInfo.set_Name(String value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.NetworkIPGet">
+            <summary>Sets the shim of NetworkInfo.get_NetworkIP()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.NetworkIPSetListOfString">
+            <summary>Sets the shim of NetworkInfo.set_NetworkIP(List`1&lt;String&gt; value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.StaticConstructor">
+            <summary>Sets the shim of NetworkInfo.NetworkInfo()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo._ListAvailableNetworksb__0String">
+            <summary>Sets the shim of NetworkInfo.&lt;ListAvailableNetworks&gt;b__0(String s)</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.AllInstances.DNSGet">
+            <summary>Sets the shim of NetworkInfo.get_DNS()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.AllInstances.DNSSetListOfString">
+            <summary>Sets the shim of NetworkInfo.set_DNS(List`1&lt;String&gt; value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.AllInstances.IPGet">
+            <summary>Sets the shim of NetworkInfo.get_IP()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.AllInstances.IPSetListOfString">
+            <summary>Sets the shim of NetworkInfo.set_IP(List`1&lt;String&gt; value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.AllInstances.NameGet">
+            <summary>Sets the shim of NetworkInfo.get_Name()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.AllInstances.NameSetString">
+            <summary>Sets the shim of NetworkInfo.set_Name(String value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.AllInstances.NetworkIPGet">
+            <summary>Sets the shim of NetworkInfo.get_NetworkIP()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkInfo.AllInstances.NetworkIPSetListOfString">
+            <summary>Sets the shim of NetworkInfo.set_NetworkIP(List`1&lt;String&gt; value)</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet">
+            <summary>Shim type of AutoProxySwitcherLib.NetworkRulesSet</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.#ctor(AutoProxySwitcherLib.NetworkRulesSet)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.Bind(System.Collections.ICollection)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.Bind(System.Collections.IEnumerable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.Bind(System.Collections.IList)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.Bind(System.Collections.Generic.ICollection{AutoProxySwitcherLib.Rules.NetworkRule})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.Bind(System.Collections.Generic.IEnumerable{AutoProxySwitcherLib.Rules.NetworkRule})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.Bind(System.Collections.Generic.IList{AutoProxySwitcherLib.Rules.NetworkRule})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.Bind(System.Collections.Generic.IReadOnlyCollection{AutoProxySwitcherLib.Rules.NetworkRule})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.Bind(System.Collections.Generic.IReadOnlyList{AutoProxySwitcherLib.Rules.NetworkRule})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.Constructor">
+            <summary>Sets the shim of NetworkRulesSet.NetworkRulesSet()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.ToString">
+            <summary>Sets the shim of NetworkRulesSet.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNetworkRulesSet.AllInstances.ToString01">
+            <summary>Sets the shim of NetworkRulesSet.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimNoProxySettings">
+            <summary>Shim type of AutoProxySwitcherLib.NoProxySettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.#ctor(AutoProxySwitcherLib.NoProxySettings)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.Configure">
+            <summary>Sets the shim of NoProxySettings.Configure()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.Constructor">
+            <summary>Sets the shim of NoProxySettings.NoProxySettings()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.ToString">
+            <summary>Sets the shim of NoProxySettings.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.AllInstances.Configure">
+            <summary>Sets the shim of NoProxySettings.Configure()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimNoProxySettings.AllInstances.ToString01">
+            <summary>Sets the shim of NoProxySettings.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings">
+            <summary>Shim type of AutoProxySwitcherLib.ProxyPACSettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.#ctor(AutoProxySwitcherLib.ProxyPACSettings)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.Configure">
+            <summary>Sets the shim of ProxyPACSettings.Configure()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.ConstructorString">
+            <summary>Sets the shim of ProxyPACSettings.ProxyPACSettings(String pacFile)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.PacFileGet">
+            <summary>Sets the shim of ProxyPACSettings.get_PacFile()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.PacFileSetString">
+            <summary>Sets the shim of ProxyPACSettings.set_PacFile(String value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.ToString">
+            <summary>Sets the shim of ProxyPACSettings.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.AllInstances.Configure">
+            <summary>Sets the shim of ProxyPACSettings.Configure()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.AllInstances.PacFileGet">
+            <summary>Sets the shim of ProxyPACSettings.get_PacFile()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.AllInstances.PacFileSetString">
+            <summary>Sets the shim of ProxyPACSettings.set_PacFile(String value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxyPACSettings.AllInstances.ToString01">
+            <summary>Sets the shim of ProxyPACSettings.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimProxySettings">
+            <summary>Shim type of AutoProxySwitcherLib.ProxySettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimProxySettings.#ctor(AutoProxySwitcherLib.ProxySettings)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimProxySettings.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimProxySettings.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxySettings.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimProxySettings.Constructor">
+            <summary>Sets the shim of ProxySettings.ProxySettings()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimProxySettings.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimRulesChecker">
+            <summary>Shim type of AutoProxySwitcherLib.RulesChecker</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimRulesChecker.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimRulesChecker.#ctor(AutoProxySwitcherLib.RulesChecker)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimRulesChecker.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimRulesChecker.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.CheckRulesAgainstNetworkNetworkInfo">
+            <summary>Sets the shim of RulesChecker.CheckRulesAgainstNetwork(NetworkInfo net)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ConstructorNetworkRulesSet">
+            <summary>Sets the shim of RulesChecker.RulesChecker(NetworkRulesSet networkRulesSet)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.NetworkRulesSetGet">
+            <summary>Sets the shim of RulesChecker.get_NetworkRulesSet()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.NetworkRulesSetSetNetworkRulesSet">
+            <summary>Sets the shim of RulesChecker.set_NetworkRulesSet(NetworkRulesSet value)</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimRulesChecker.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.AllInstances.CheckRulesAgainstNetworkNetworkInfo">
+            <summary>Sets the shim of RulesChecker.CheckRulesAgainstNetwork(NetworkInfo net)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.AllInstances.NetworkRulesSetGet">
+            <summary>Sets the shim of RulesChecker.get_NetworkRulesSet()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.AllInstances.NetworkRulesSetSetNetworkRulesSet">
+            <summary>Sets the shim of RulesChecker.set_NetworkRulesSet(NetworkRulesSet value)</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult">
+            <summary>Shim type of AutoProxySwitcherLib.RulesChecker+RulesCheckerResult</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.#ctor(AutoProxySwitcherLib.RulesChecker.RulesCheckerResult)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.Constructor">
+            <summary>Sets the shim of RulesCheckerResult.RulesCheckerResult()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.ConstructorReasonsString">
+            <summary>Sets the shim of RulesCheckerResult.RulesCheckerResult(Reasons reason, String reasonString)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.MatchGet">
+            <summary>Sets the shim of RulesCheckerResult.get_Match()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.ReasonGet">
+            <summary>Sets the shim of RulesCheckerResult.get_Reason()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.ReasonSetReasons">
+            <summary>Sets the shim of RulesCheckerResult.set_Reason(Reasons value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.ReasonStringGet">
+            <summary>Sets the shim of RulesCheckerResult.get_ReasonString()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.ReasonStringSetString">
+            <summary>Sets the shim of RulesCheckerResult.set_ReasonString(String value)</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.AllInstances.MatchGet">
+            <summary>Sets the shim of RulesCheckerResult.get_Match()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.AllInstances.ReasonGet">
+            <summary>Sets the shim of RulesCheckerResult.get_Reason()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.AllInstances.ReasonSetReasons">
+            <summary>Sets the shim of RulesCheckerResult.set_Reason(Reasons value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.AllInstances.ReasonStringGet">
+            <summary>Sets the shim of RulesCheckerResult.get_ReasonString()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimRulesChecker.ShimRulesCheckerResult.AllInstances.ReasonStringSetString">
+            <summary>Sets the shim of RulesCheckerResult.set_ReasonString(String value)</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings">
+            <summary>Shim type of AutoProxySwitcherLib.StandardProxySettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.#ctor(AutoProxySwitcherLib.StandardProxySettings)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.Configure">
+            <summary>Sets the shim of StandardProxySettings.Configure()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.ConstructorString">
+            <summary>Sets the shim of StandardProxySettings.StandardProxySettings(String proxyAddress)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.ToString">
+            <summary>Sets the shim of StandardProxySettings.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.AllInstances.Configure">
+            <summary>Sets the shim of StandardProxySettings.Configure()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.ShimStandardProxySettings.AllInstances.ToString01">
+            <summary>Sets the shim of StandardProxySettings.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.StubNetworkChangeDetector">
+            <summary>Stub type of AutoProxySwitcherLib.NetworkChangeDetector</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNetworkChangeDetector.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNetworkChangeDetector.InitializeStub">
+            <summary>Initializes a new instance of type StubNetworkChangeDetector</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkChangeDetector.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkChangeDetector.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkChangeDetector.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.StubNetworkConfiguration">
+            <summary>Stub type of AutoProxySwitcherLib.NetworkConfiguration</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNetworkConfiguration.#ctor(System.String,AutoProxySwitcherLib.NetworkRulesSet,AutoProxySwitcherLib.ProxySettings)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNetworkConfiguration.InitializeStub">
+            <summary>Initializes a new instance of type StubNetworkConfiguration</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkConfiguration.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkConfiguration.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkConfiguration.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.StubNetworkInfo">
+            <summary>Stub type of AutoProxySwitcherLib.NetworkInfo</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNetworkInfo.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNetworkInfo.InitializeStub">
+            <summary>Initializes a new instance of type StubNetworkInfo</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkInfo.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkInfo.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkInfo.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.StubNetworkRulesSet">
+            <summary>Stub type of AutoProxySwitcherLib.NetworkRulesSet</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNetworkRulesSet.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNetworkRulesSet.InitializeStub">
+            <summary>Initializes a new instance of type StubNetworkRulesSet</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNetworkRulesSet.ToString">
+            <summary>Sets the stub of NetworkRulesSet.ToString()</summary>
+        </member>
+        <member name="F:AutoProxySwitcherLib.Fakes.StubNetworkRulesSet.ToString01">
+            <summary>Sets the stub of NetworkRulesSet.ToString()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkRulesSet.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkRulesSet.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNetworkRulesSet.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.StubNoProxySettings">
+            <summary>Stub type of AutoProxySwitcherLib.NoProxySettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNoProxySettings.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNoProxySettings.Configure">
+            <summary>Sets the stub of NoProxySettings.Configure()</summary>
+        </member>
+        <member name="F:AutoProxySwitcherLib.Fakes.StubNoProxySettings.Configure01">
+            <summary>Sets the stub of NoProxySettings.Configure()</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNoProxySettings.InitializeStub">
+            <summary>Initializes a new instance of type StubNoProxySettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubNoProxySettings.ToString">
+            <summary>Sets the stub of NoProxySettings.ToString()</summary>
+        </member>
+        <member name="F:AutoProxySwitcherLib.Fakes.StubNoProxySettings.ToString01">
+            <summary>Sets the stub of NoProxySettings.ToString()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNoProxySettings.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNoProxySettings.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubNoProxySettings.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.StubProxyPACSettings">
+            <summary>Stub type of AutoProxySwitcherLib.ProxyPACSettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubProxyPACSettings.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubProxyPACSettings.Configure">
+            <summary>Sets the stub of ProxyPACSettings.Configure()</summary>
+        </member>
+        <member name="F:AutoProxySwitcherLib.Fakes.StubProxyPACSettings.Configure01">
+            <summary>Sets the stub of ProxyPACSettings.Configure()</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubProxyPACSettings.InitializeStub">
+            <summary>Initializes a new instance of type StubProxyPACSettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubProxyPACSettings.ToString">
+            <summary>Sets the stub of ProxyPACSettings.ToString()</summary>
+        </member>
+        <member name="F:AutoProxySwitcherLib.Fakes.StubProxyPACSettings.ToString01">
+            <summary>Sets the stub of ProxyPACSettings.ToString()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubProxyPACSettings.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubProxyPACSettings.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubProxyPACSettings.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.StubProxySettings">
+            <summary>Stub type of AutoProxySwitcherLib.ProxySettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubProxySettings.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubProxySettings.Configure">
+            <summary>Sets the stub of ProxySettings.Configure()</summary>
+        </member>
+        <member name="F:AutoProxySwitcherLib.Fakes.StubProxySettings.Configure01">
+            <summary>Sets the stub of ProxySettings.Configure()</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubProxySettings.InitializeStub">
+            <summary>Initializes a new instance of type StubProxySettings</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubProxySettings.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubProxySettings.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubProxySettings.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.StubRulesChecker">
+            <summary>Stub type of AutoProxySwitcherLib.RulesChecker</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubRulesChecker.#ctor(AutoProxySwitcherLib.NetworkRulesSet)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubRulesChecker.InitializeStub">
+            <summary>Initializes a new instance of type StubRulesChecker</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubRulesChecker.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubRulesChecker.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubRulesChecker.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Fakes.StubStandardProxySettings">
+            <summary>Stub type of AutoProxySwitcherLib.StandardProxySettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubStandardProxySettings.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubStandardProxySettings.Configure">
+            <summary>Sets the stub of StandardProxySettings.Configure()</summary>
+        </member>
+        <member name="F:AutoProxySwitcherLib.Fakes.StubStandardProxySettings.Configure01">
+            <summary>Sets the stub of StandardProxySettings.Configure()</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubStandardProxySettings.InitializeStub">
+            <summary>Initializes a new instance of type StubStandardProxySettings</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Fakes.StubStandardProxySettings.ToString">
+            <summary>Sets the stub of StandardProxySettings.ToString()</summary>
+        </member>
+        <member name="F:AutoProxySwitcherLib.Fakes.StubStandardProxySettings.ToString01">
+            <summary>Sets the stub of StandardProxySettings.ToString()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubStandardProxySettings.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubStandardProxySettings.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Fakes.StubStandardProxySettings.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRule">
+            <summary>Shim type of AutoProxySwitcherLib.Rules.NetworkRule</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRule.#ctor(AutoProxySwitcherLib.Rules.NetworkRule)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRule.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRule.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRule.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRule.Constructor">
+            <summary>Sets the shim of NetworkRule.NetworkRule()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRule.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS">
+            <summary>Shim type of AutoProxySwitcherLib.Rules.NetworkRuleDNS</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.#ctor(AutoProxySwitcherLib.Rules.NetworkRuleDNS)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.ConstructorString">
+            <summary>Sets the shim of NetworkRuleDNS.NetworkRuleDNS(String DNS)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.DNSGet">
+            <summary>Sets the shim of NetworkRuleDNS.get_DNS()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.DNSSetString">
+            <summary>Sets the shim of NetworkRuleDNS.set_DNS(String value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.ToString">
+            <summary>Sets the shim of NetworkRuleDNS.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.AllInstances.DNSGet">
+            <summary>Sets the shim of NetworkRuleDNS.get_DNS()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.AllInstances.DNSSetString">
+            <summary>Sets the shim of NetworkRuleDNS.set_DNS(String value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleDNS.AllInstances.ToString01">
+            <summary>Sets the shim of NetworkRuleDNS.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet">
+            <summary>Shim type of AutoProxySwitcherLib.Rules.NetworkRuleSubnet</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.#ctor(AutoProxySwitcherLib.Rules.NetworkRuleSubnet)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.ConstructorString">
+            <summary>Sets the shim of NetworkRuleSubnet.NetworkRuleSubnet(String subnet)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.SubnetGet">
+            <summary>Sets the shim of NetworkRuleSubnet.get_Subnet()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.SubnetSetString">
+            <summary>Sets the shim of NetworkRuleSubnet.set_Subnet(String value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.ToString">
+            <summary>Sets the shim of NetworkRuleSubnet.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.AllInstances.SubnetGet">
+            <summary>Sets the shim of NetworkRuleSubnet.get_Subnet()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.AllInstances.SubnetSetString">
+            <summary>Sets the shim of NetworkRuleSubnet.set_Subnet(String value)</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.ShimNetworkRuleSubnet.AllInstances.ToString01">
+            <summary>Sets the shim of NetworkRuleSubnet.ToString()</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRule">
+            <summary>Stub type of AutoProxySwitcherLib.Rules.NetworkRule</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRule.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRule.InitializeStub">
+            <summary>Initializes a new instance of type StubNetworkRule</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRule.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRule.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRule.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleDNS">
+            <summary>Stub type of AutoProxySwitcherLib.Rules.NetworkRuleDNS</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleDNS.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleDNS.InitializeStub">
+            <summary>Initializes a new instance of type StubNetworkRuleDNS</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleDNS.ToString">
+            <summary>Sets the stub of NetworkRuleDNS.ToString()</summary>
+        </member>
+        <member name="F:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleDNS.ToString01">
+            <summary>Sets the stub of NetworkRuleDNS.ToString()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleDNS.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleDNS.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleDNS.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleSubnet">
+            <summary>Stub type of AutoProxySwitcherLib.Rules.NetworkRuleSubnet</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleSubnet.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleSubnet.InitializeStub">
+            <summary>Initializes a new instance of type StubNetworkRuleSubnet</summary>
+        </member>
+        <member name="M:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleSubnet.ToString">
+            <summary>Sets the stub of NetworkRuleSubnet.ToString()</summary>
+        </member>
+        <member name="F:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleSubnet.ToString01">
+            <summary>Sets the stub of NetworkRuleSubnet.ToString()</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleSubnet.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleSubnet.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:AutoProxySwitcherLib.Rules.Fakes.StubNetworkRuleSubnet.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+    </members>
+</doc>
