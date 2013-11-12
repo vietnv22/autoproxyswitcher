@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Networks>
+  <Network name="Config 1">
+    <Proxy type="Standard" url="http://nphopx002.net.local:3128" />
+     <Rules>
+      <Subnet ip="172.17.1.0/24" />
+      <Subnet ip="172.17.2.0/24" />
+      <Subnet ip="172.17.3.0/24" />
+      <Subnet ip="172.17.4.0/24" />
+      <Subnet ip="172.17.5.0/24" />
+    </Rules>
+  </Network>
+  
+  <Network name="Config 2">
+    <Proxy type="Standard" url="http://npakpx001.net.local:3128" />
+     <Rules>
+      <Subnet ip="172.17.10.0/24" />
+      <Subnet ip="172.17.11.0/24" />
+      <Subnet ip="172.17.12.0/24" />
+      <Subnet ip="172.17.13.0/24" />
+    </Rules>
+  </Network>
+  
+  <Network name="Config 3">
+    <Proxy type="Standard" url="http://npptpx001.net.local:3128" />
+     <Rules>
+      <Subnet ip="172.17.20.0/24" />
+      <Subnet ip="172.17.21.0/24" />
+    </Rules>
+  </Network>
+
+  <Network name="Config 4">
+    <Proxy type="Standard" url="http://nppepx001.net.local:3128" />
+     <Rules>
+      <Subnet ip="172.17.80.0/24" />
+    </Rules>
+  </Network>
+
+  <Network name="Config 5">
+    <Proxy type="Standard" url="http://npmepx001.net.local:3128" />
+     <Rules>
+      <Subnet ip="172.17.82.0/24" />
+    </Rules>
+  </Network>
+
+  <Network name="Config 6">
+    <Proxy type="Standard" url="http://nppecatpx001.net.local:3128" />
+     <Rules>
+      <Subnet ip="172.28.9.0/24" />
+    </Rules>
+  </Network>
+
+  <!-- Default -->
+  <Network name="Default Config">
+    <Proxy type="Standard" url="http://127.0.0.1:80" />
+  </Network>
+</Networks>

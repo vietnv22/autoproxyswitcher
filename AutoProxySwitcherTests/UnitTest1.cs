@@ -119,5 +119,68 @@ namespace AutoProxySwitcherTests
             Assert.AreSame(configuration, ncd.Configurations[0]);
             //Assert.IsTrue(result.ReasonString.Equals("network DNS matches 192.168.1.252"));
         }
+
+        /// <summary>
+        /// Checks that the right config is taken among many
+        /// </summary>
+        [TestMethod]
+        public void TestManyConfigs()
+        {
+            AutoProxySwitcherLib.NetworkChangeDetector ncd = new NetworkChangeDetector();
+            RulesChecker.RulesCheckerResult result;
+            NetworkInfo networkInfo;
+            ncd.LoadConfigurations("Samples/ManyConfigs.xml");
+
+            NetworkInfo ni = new NetworkInfo();
+            ni.Description = "Test Network";
+            ni.DNS = new List<string> { "172.17.4.80", "172.17.4.81" };
+            ni.IP = new List<string> { "172.17.4.145" };
+            ni.NetworkIP = new List<string> { "172.17.4.0/24" };
+            ni.Type = "Local Area Connection";
+            ni.IfName = "test";
+
+            List<NetworkInfo> networks;
+            NetworkConfiguration configuration;
+
+            networks = new List<NetworkInfo> { ni };
+            configuration = ncd.FindMatchingConfiguration(networks, out result, out networkInfo);
+
+            Console.WriteLine(result.ReasonString);
+            Console.WriteLine(configuration.ProxySettings);
+            Assert.AreEqual(configuration.Name, "Config 1");
+            Assert.IsTrue(result.ReasonString.Equals("network subnet matches 172.17.4.0/24"));
+            
+
+            ni.Description = "Test Network";
+            ni.DNS = new List<string> { "172.17.80.80", "172.17.80.81" };
+            ni.IP = new List<string> { "172.17.80.15" };
+            ni.NetworkIP = new List<string> { "172.17.80.0/24" };
+            ni.Type = "Local Area Connection";
+            ni.IfName = "test";
+
+            networks = new List<NetworkInfo> { ni };
+            configuration = ncd.FindMatchingConfiguration(networks, out result, out networkInfo);
+
+            Console.WriteLine(result.ReasonString);
+            Console.WriteLine(configuration.ProxySettings);
+            Assert.AreEqual(configuration.Name, "Config 4");
+            Assert.IsTrue(result.ReasonString.Equals("network subnet matches 172.17.80.0/24"));
+
+            ni.Description = "Test Network";
+            ni.DNS = new List<string> { "172.16.0.5" };
+            ni.IP = new List<string> { "172.16.0.78" };
+            ni.NetworkIP = new List<string> { "172.16.2/24" };
+            ni.Type = "Local Area Connection";
+            ni.IfName = "test";
+
+            networks = new List<NetworkInfo> { ni };
+            configuration = ncd.FindMatchingConfiguration(networks, out result, out networkInfo);
+
+            Console.WriteLine(result.ReasonString);
+            Console.WriteLine(configuration.ProxySettings); 
+            Assert.AreEqual(configuration.Name, "Default Config");
+            Assert.IsTrue(result.ReasonString.Equals("default rule match"));
+        }
+
     }
 }

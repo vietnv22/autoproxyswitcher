@@ -41,30 +41,49 @@ namespace AutoProxySwitcherLib
     {
         private string proxyAddress;
         private string exceptions;
+        private bool bypassLocalAddresses;
 
         /// <summary>
         /// Creates a standard proxy setting
         /// </summary>
         /// <param name="proxyAddress"></param>
         /// <param name="exceptions">null if no change required</param>
-        public StandardProxySettings(string proxyAddress, string exceptions)
+        /// <param name="bypassLocalAddresses">true to bypass local addresses</param>
+        public StandardProxySettings(string proxyAddress, string exceptions, bool bypassLocalAddresses)
         {
             this.proxyAddress = proxyAddress;
             this.exceptions = exceptions;
+            this.bypassLocalAddresses = bypassLocalAddresses;
         }
 
         public override void Configure()
         {
             SystemProxy.ProxyConfigurator pc = new SystemProxy.ProxyConfigurator();
-            pc.SetProxy(proxyAddress, exceptions);
+
+            string bypassList = exceptions;
+
+            if (bypassLocalAddresses)
+            {
+                if (bypassList == null)
+                {
+                    bypassList = "<local>";
+                }
+                else
+                {
+                    bypassList = "<local>" + bypassList;
+                }
+            }
+
+            pc.SetProxy(proxyAddress, bypassList);
         }
 
         public override string ToString()
         {
             string proxyStr = proxyAddress;
+
             if (exceptions == null)
             {
-                proxyStr += " without exceptions";
+                proxyStr += " with no exceptions";
             }
             else if (exceptions == "")
             {
@@ -73,6 +92,11 @@ namespace AutoProxySwitcherLib
             else
             {
                 proxyStr += " with exceptions";
+            }
+
+            if (bypassLocalAddresses)
+            {
+                proxyStr += ", bypass local addresses";
             }
 
             return proxyStr;
