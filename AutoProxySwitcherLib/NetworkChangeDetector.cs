@@ -22,6 +22,14 @@ namespace AutoProxySwitcherLib
         public event ProxyChangedEventHandler ProxyChanged;
 
         /// <summary>
+        /// Constructor
+        /// </summary>
+        public NetworkChangeDetector()
+        {
+            m_configurations = new List<NetworkConfiguration>();
+        }
+
+        /// <summary>
         /// Assigns or returns proxyNode/rules configurations
         /// </summary>
         public List<NetworkConfiguration> Configurations
@@ -30,6 +38,9 @@ namespace AutoProxySwitcherLib
             set { m_configurations = value; }
         }
 
+        /// <summary>
+        /// Returns current available networks
+        /// </summary>
         public IList<NetworkInfo> CurrentNetworks
         {
             get { return _currentNetworks;  }
@@ -70,7 +81,15 @@ namespace AutoProxySwitcherLib
         public void LoadConfigurations(string fileName)
         {
             log.Info("Loading configurations from file " + fileName);
-            m_configurations = NetworkConfigurations.FromFile(fileName);
+
+            try
+            {
+                m_configurations = NetworkConfigurations.FromFile(fileName);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Failed to load configuration file", ex);
+            }
         }
 
         /// <summary>

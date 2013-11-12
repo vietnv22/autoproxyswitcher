@@ -67,7 +67,9 @@ namespace AutoProxySwitcherLib
                         break;
 
                     case "Standard":
-                        proxySettings = new StandardProxySettings(proxyNode.Attributes["url"].Value, proxyNode.Attributes["exceptions"] != null ? proxyNode.Attributes["exceptions"].Value : null);
+                        bool bypassLocal = proxyNode.Attributes["bypasslocal"] != null ? bool.Parse(proxyNode.Attributes["bypasslocal"].Value) : false;
+                        string exceptions = proxyNode.Attributes["exceptions"] != null ? proxyNode.Attributes["exceptions"].Value : null;
+                        proxySettings = new StandardProxySettings(proxyNode.Attributes["url"].Value, exceptions, bypassLocal);
                         break;
 
                     case "None":
@@ -75,7 +77,7 @@ namespace AutoProxySwitcherLib
                         break;
 
                     default:
-                        throw new Exception("Unknown ProxyType" + proxyNode.Attributes["type"].Value);
+                        throw new Exception("Unknown Proxy type " + proxyNode.Attributes["type"].Value);
                 }
 
                 // Ajouter la configuration

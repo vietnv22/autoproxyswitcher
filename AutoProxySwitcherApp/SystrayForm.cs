@@ -136,13 +136,23 @@ namespace AutoProxySwitcher
                 }
             }
 
-            // Charger les règles
-            m_networkChangeDetector.LoadConfigurations(rulesFile);
-
             // Build status form
             m_statusForm = new StatusForm(m_networkChangeDetector);
             m_statusForm.FormClosing += new FormClosingEventHandler(m_statusForm_FormClosing);
 
+            // Charger les règles
+            try
+            {
+                m_networkChangeDetector.LoadConfigurations(rulesFile);
+            }
+            catch (Exception ex)
+            {
+                m_statusForm.Status = ex.Message + ":\n\n" + ex.InnerException.Message;
+                m_notifyIcon.BalloonTipText = m_statusForm.Status;
+                m_notifyIcon.ShowBalloonTip(3000);
+            }
+
+            // Build configuration list
             m_statusForm.comboProxy.Items.Add("auto");
             foreach (NetworkConfiguration configuration in m_networkChangeDetector.Configurations)
             {
