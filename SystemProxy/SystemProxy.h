@@ -11,5 +11,7 @@ namespace SystemProxy {
         public :void SetProxyPac(String ^pacFile);
         public :void ProxyConfigurator::SetProxy(String ^address, String ^exceptions);
         public :void ResetProxy();
+
+		private :void RefreshIE();
 	};
 }

@@ -31,6 +31,8 @@ namespace SystemProxy {
 			throw gcnew Exception("InternetSetOption: " + GetLastError());
 		}
 
+		RefreshIE();
+
 		free(Option[0].Value.pszValue);
 	}
 
@@ -71,6 +73,8 @@ namespace SystemProxy {
 		{
 			throw gcnew Exception("InternetSetOption: " + GetLastError());
 		}
+
+		RefreshIE();
 	}
 
 	void ProxyConfigurator::ResetProxy()
@@ -95,7 +99,12 @@ namespace SystemProxy {
 			throw gcnew Exception("InternetSetOption: " + GetLastError());
 		}
 
-		// Tell IE the settings changed
+		RefreshIE();
+	}
+
+	// Tell IE the settings changed
+	void ProxyConfigurator::RefreshIE()
+	{
 		InternetSetOption(NULL, INTERNET_OPTION_SETTINGS_CHANGED, NULL, 0);
 		InternetSetOption(NULL, INTERNET_OPTION_REFRESH , NULL, 0);
 	}
