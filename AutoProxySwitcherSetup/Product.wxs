@@ -15,21 +15,11 @@
                   CloseMessage="yes"
                   Target="AutoProxySwitcher.exe" />
 
-    <!-- Detect previous versions -->
-    <Upgrade Id="$(var.upgradeCode)">
-      <UpgradeVersion Minimum="1.0.0"
-                      IncludeMinimum="yes"
-                      Maximum="$(var.version)"
-                      Property="OLDERVERSIONBEINGUPGRADED" />
-    </Upgrade>
-
-    <!-- Detect newest version already installed -->
-    <Upgrade Id="$(var.upgradeCode)">
-      <UpgradeVersion Minimum="$(var.version)"
-                      IncludeMinimum="no"
-                      OnlyDetect="yes"
-                      Property="NEWERVERSIONDETECTED" />
-    </Upgrade>
+    <MajorUpgrade
+      Schedule="afterInstallInitialize"
+      MigrateFeatures="no"
+      AllowDowngrades="no"
+      DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />    
 
     <!-- Media -->
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
@@ -77,7 +67,7 @@
 
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="ApplicationShortcut" Guid="{73D85242-781E-4dc3-BD2C-01A9204C20CD}">
-        <Shortcut Id="ApplicationStartMenuShortcut"
+          <Shortcut Id="ApplicationStartMenuShortcut"
                   Name="$(var.projectName)"
                   Description="$(var.projectName)"
                   Target="[INSTALLLOCATION]AutoProxySwitcher.exe"
@@ -122,13 +112,6 @@
           Event="DoAction"
           Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
     </UI>
-
-    <!-- Remove previous version -->
-    <InstallExecuteSequence>
-      <RemoveExistingProducts After="InstallInitialize"/>
-      <!-- RemoveExistingProducts after InstallFiles ==> ensure files are not replaced if they have been changed, event configuration files (which are components and defined as key path of the components) -->
-      <!--<RemoveExistingProducts After="InstallFiles"/>-->
-    </InstallExecuteSequence>
 
     <!-- Avoid installing over same or newer version -->
     <Condition Message="A later version of [ProductName] is already installed. Setup will now exit.">
