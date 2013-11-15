@@ -57,7 +57,7 @@ namespace AutoProxySwitcherWPF.ViewModel
 
                 for (int i = 0; i < 5; i++)
                 {
-                    _configurationsList.Add(new NetworkConfiguration("Config #" + i, rulesSet, new StandardProxySettings("http://test:8080", null, false)));
+                    _configurationsList.Add(new NetworkConfiguration("Config #" + i, rulesSet, new StandardProxySettings("http://test:8080", null, null)));
                 }
 
                 _activeConfiguration = _configurationsList[2];
