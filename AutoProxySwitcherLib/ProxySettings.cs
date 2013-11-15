@@ -41,7 +41,7 @@ namespace AutoProxySwitcherLib
     {
         private string proxyAddress;
         private string exceptions;
-        private bool bypassLocalAddresses;
+        private bool? bypassLocalAddresses;
 
         /// <summary>
         /// Creates a standard proxy setting
@@ -49,7 +49,7 @@ namespace AutoProxySwitcherLib
         /// <param name="proxyAddress"></param>
         /// <param name="exceptions">null if no change required</param>
         /// <param name="bypassLocalAddresses">true to bypass local addresses</param>
-        public StandardProxySettings(string proxyAddress, string exceptions, bool bypassLocalAddresses)
+        public StandardProxySettings(string proxyAddress, string exceptions, bool? bypassLocalAddresses)
         {
             this.proxyAddress = proxyAddress;
             this.exceptions = exceptions;
@@ -60,17 +60,20 @@ namespace AutoProxySwitcherLib
         {
             SystemProxy.ProxyConfigurator pc = new SystemProxy.ProxyConfigurator();
 
-            string bypassList = exceptions;
+            string bypassList = null;
 
-            if (bypassLocalAddresses)
+            if (bypassLocalAddresses.HasValue || exceptions != null)
             {
-                if (bypassList == null)
+                bypassList = "";
+
+                if (bypassLocalAddresses.HasValue && bypassLocalAddresses == true)
                 {
-                    bypassList = "<local>";
+                    bypassList += "<local>";
                 }
-                else
+
+                if (exceptions != null)
                 {
-                    bypassList = "<local>" + bypassList;
+                    bypassList += exceptions;
                 }
             }
 
@@ -79,27 +82,28 @@ namespace AutoProxySwitcherLib
 
         public override string ToString()
         {
-            string proxyStr = proxyAddress;
+            string info = "";
 
-            if (exceptions == null)
+            if (bypassLocalAddresses != null || exceptions != null)
             {
-                proxyStr += " with no exceptions";
-            }
-            else if (exceptions == "")
-            {
-                proxyStr += " and clear exceptions";
+                info = " clear exceptions";
+
+                if (exceptions != null)
+                {
+                    info = " with exceptions";
+                }
+
+                if (bypassLocalAddresses != null && bypassLocalAddresses == true)
+                {
+                    info += " and bypass proxy for local addresses";
+                }
             }
             else
             {
-                proxyStr += " with exceptions";
+                info = " exceptions untouched";
             }
 
-            if (bypassLocalAddresses)
-            {
-                proxyStr += ", bypass local addresses";
-            }
-
-            return proxyStr;
+            return proxyAddress + info;
         }
     }
 

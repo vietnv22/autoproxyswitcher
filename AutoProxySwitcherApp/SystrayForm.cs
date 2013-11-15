@@ -14,6 +14,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using AutoProxySwitcherLib;
 using log4net;
+using System.Reflection;
 
 namespace AutoProxySwitcher
 {
@@ -79,7 +80,12 @@ namespace AutoProxySwitcher
 
             m_notifyIcon.BalloonTipText = info;
 
-            detailedInfo = "Update date: " + System.DateTime.Now;
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string version = fvi.FileVersion;
+
+            detailedInfo = "V" + fvi.FileVersion;
+            detailedInfo += "\n\nUpdate date: " + System.DateTime.Now;
             detailedInfo += "\n\n" + info;
 
             if (networkInfo != null)

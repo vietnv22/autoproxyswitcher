@@ -67,7 +67,7 @@ namespace AutoProxySwitcherLib
                         break;
 
                     case "Standard":
-                        bool bypassLocal = proxyNode.Attributes["bypasslocal"] != null ? bool.Parse(proxyNode.Attributes["bypasslocal"].Value) : false;
+                        bool? bypassLocal = proxyNode.Attributes["bypasslocal"] != null ? (bool?)bool.Parse(proxyNode.Attributes["bypasslocal"].Value) : null;
                         string exceptions = proxyNode.Attributes["exceptions"] != null ? proxyNode.Attributes["exceptions"].Value : null;
                         proxySettings = new StandardProxySettings(proxyNode.Attributes["url"].Value, exceptions, bypassLocal);
                         break;
