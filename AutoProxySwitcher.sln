@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoProxySwitcherWPF", "Aut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoProxySwitcherTests", "AutoProxySwitcherTests\AutoProxySwitcherTests.csproj", "{41517D86-F0F9-4858-B1B8-D8B64C29BDB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{4A48290A-09F0-4976-BFA9-A7D0EA36034C}"
+EndProject
 Global
 	GlobalSection(MercurialSourceControlSolutionProperties) = preSolution
 		SolutionIsControlled = True
@@ -101,6 +103,18 @@ Global
 		{41517D86-F0F9-4858-B1B8-D8B64C29BDB4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{41517D86-F0F9-4858-B1B8-D8B64C29BDB4}.Release|Win32.ActiveCfg = Release|Any CPU
 		{41517D86-F0F9-4858-B1B8-D8B64C29BDB4}.Release|x86.ActiveCfg = Release|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Release|Win32.ActiveCfg = Release|Any CPU
+		{4A48290A-09F0-4976-BFA9-A7D0EA36034C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

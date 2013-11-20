@@ -8,10 +8,15 @@ namespace SystemProxy {
 
 	public ref class ProxyConfigurator
 	{
-        public :void SetProxyPac(String ^pacFile);
-        public :void ProxyConfigurator::SetProxy(String ^address, String ^exceptions);
-        public :void ResetProxy();
+	private:
+		static log4net::ILog^ log = log4net::LogManager::GetLogger("SystemProxy");
 
-		private :void RefreshIE();
+    public:
+		void SetProxyPac(String ^pacFile);
+		void ProxyConfigurator::SetProxy(String ^address, String ^exceptions);
+		void ResetProxy();
+
+	private:
+		void Refresh();
 	};
 }

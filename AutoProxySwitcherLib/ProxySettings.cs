@@ -66,14 +66,19 @@ namespace AutoProxySwitcherLib
             {
                 bypassList = "";
 
-                if (bypassLocalAddresses.HasValue && bypassLocalAddresses == true)
-                {
-                    bypassList += "<local>";
-                }
-
                 if (exceptions != null)
                 {
                     bypassList += exceptions;
+                }
+
+                if (bypassLocalAddresses.HasValue && bypassLocalAddresses == true)
+                {
+                    if (bypassList.Length > 0)
+                    {
+                        bypassList += ";";
+                    }
+                    
+                    bypassList += "<local>";
                 }
             }
 
@@ -88,7 +93,7 @@ namespace AutoProxySwitcherLib
             {
                 info = " clear exceptions";
 
-                if (exceptions != null)
+                if (!string.IsNullOrWhiteSpace(exceptions))
                 {
                     info = " with exceptions";
                 }
