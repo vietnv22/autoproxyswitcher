@@ -36,8 +36,8 @@ namespace AutoProxySwitcherWPF
             // Get ViewModel, Window and Taskbar icon and connect everything
             ViewModelLocator locator = (ViewModelLocator)FindResource("Locator");
 
-            MainWindow mw = (MainWindow)FindResource("MainWindow");
-
+            var mw = (MainWindow)FindResource("MainWindow");
+            mw.Show();
             (FindResource("MyNotifyIcon") as TaskbarIcon).LeftClickCommand = new RelayCommand
             (
                 () =>
@@ -71,7 +71,7 @@ namespace AutoProxySwitcherWPF
                  {
                      try
                      {
-                         TaskbarIcon tb = (TaskbarIcon)FindResource("MyNotifyIcon");
+                         TaskbarIcon tb = FindResource("MyNotifyIcon") as TaskbarIcon;
 
                          log.Debug("Change message received");
 

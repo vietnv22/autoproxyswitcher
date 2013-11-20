@@ -68,10 +68,7 @@ namespace AutoProxySwitcherLib
                 log.Error("Failed to listen for changes", ex);
             }
 
-            // Force first check (in a thread, since it can last some time
-            log.Info("Starting first thread");
-            System.Threading.Thread thread = new System.Threading.Thread(() => { log.Info("First thread"); AddressChangedCallback(null, null); });
-            thread.Start();
+            SetConfiguration(null);
         }
 
         /// <summary>
@@ -98,23 +95,10 @@ namespace AutoProxySwitcherLib
         /// <param name="name">Configuration name, set null to autodetect</param>
         public void SetConfiguration(string name)
         {
-            log.Info("Set configuration " + name);
-
-            if (name == null || name == "auto")
-            {
-                SetProxyAccordingToNetwork();
-            }
-            else
-            {
-                NetworkConfiguration configuration = m_configurations.Find((c) => c.Name == name);
-                configuration.ProxySettings.Configure();
-
-                // Evénement
-                if (ProxyChanged != null)
-                {
-                    ProxyChanged(name, null, configuration.ProxySettings, "Setting forced");
-                }
-            }
+            // Force first check (in a thread, since it can last some time
+            log.Info("Starting setconfiguration thread for " + name);
+            System.Threading.Thread thread = new System.Threading.Thread(() => { log.Info("setconfiguration thread for " + name); AddressChangedCallback(name, null); });
+            thread.Start();
         }
 
         /// <summary>
@@ -174,7 +158,7 @@ namespace AutoProxySwitcherLib
             try
             {
                 log.Info("Address changed");
-                SetProxyAccordingToNetwork();
+                SetProxyAccordingToNetwork(sender is string ? (string)sender : null);
             }
             catch (Exception ex)
             {
@@ -185,33 +169,49 @@ namespace AutoProxySwitcherLib
         /// <summary>
         /// Sets proxy according to current available networks and configurations rules
         /// </summary>
-        private void SetProxyAccordingToNetwork()
+        private void SetProxyAccordingToNetwork(string configName)
         {
-            NetworkInfo matchingNetwork = null;
-            NetworkConfiguration matchingConfiguration = null;
-            RulesChecker.RulesCheckerResult result = new RulesChecker.RulesCheckerResult();
-
-            // Get current networks
-            IList<NetworkInfo> currentNetworks = NetworkManager.ListAvailableNetworks();
-            _currentNetworks = currentNetworks;
-            foreach (var networkInfo in currentNetworks)
+            if (configName != null)
             {
-                log.Debug("Network " + networkInfo);
+                log.Info("Set configuration " + configName);
+
+                NetworkConfiguration configuration = m_configurations.Find((c) => c.Name == configName);
+                configuration.ProxySettings.Configure();
+
+                // Evénement
+                if (ProxyChanged != null)
+                {
+                    ProxyChanged(configName, null, configuration.ProxySettings, "Setting forced");
+                }
             }
-
-            // Find matching configuration
-            matchingConfiguration = FindMatchingConfiguration(currentNetworks, out result, out matchingNetwork);
-
-            // Configurer le configuration en conséquence
-            if (matchingConfiguration != null)
+            else
             {
-                matchingConfiguration.ProxySettings.Configure();
-            }
+                NetworkInfo matchingNetwork = null;
+                NetworkConfiguration matchingConfiguration = null;
+                RulesChecker.RulesCheckerResult result = new RulesChecker.RulesCheckerResult();
 
-            // Evénement
-            if (ProxyChanged != null)
-            {
-                ProxyChanged(matchingConfiguration.Name, result.Reason != Reasons.DEFAULT ? matchingNetwork : null, matchingConfiguration.ProxySettings, result.ReasonString);
+                // Get current networks
+                IList<NetworkInfo> currentNetworks = NetworkManager.ListAvailableNetworks();
+                _currentNetworks = currentNetworks;
+                foreach (var networkInfo in currentNetworks)
+                {
+                    log.Debug("Network " + networkInfo);
+                }
+
+                // Find matching configuration
+                matchingConfiguration = FindMatchingConfiguration(currentNetworks, out result, out matchingNetwork);
+
+                // Configurer le configuration en conséquence
+                if (matchingConfiguration != null)
+                {
+                    matchingConfiguration.ProxySettings.Configure();
+                }
+
+                // Evénement
+                if (ProxyChanged != null)
+                {
+                    ProxyChanged(matchingConfiguration.Name, result.Reason != Reasons.DEFAULT ? matchingNetwork : null, matchingConfiguration.ProxySettings, result.ReasonString);
+                }
             }
         }
     }
